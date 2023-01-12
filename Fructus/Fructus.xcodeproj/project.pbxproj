@@ -17,6 +17,7 @@
 		BD4C1E7328C75EF00057D184 /* FruitCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD4C1E7228C75EF00057D184 /* FruitCardView.swift */; };
 		BD4C1E7528C764190057D184 /* StartButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD4C1E7428C764190057D184 /* StartButtonView.swift */; };
 		BD4C1E7728C7691B0057D184 /* OnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD4C1E7628C7691B0057D184 /* OnboardingView.swift */; };
+		BD5AC4BD2970279100DBF270 /* FruitDetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD5AC4BC2970279100DBF270 /* FruitDetailsView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -31,6 +32,7 @@
 		BD4C1E7228C75EF00057D184 /* FruitCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FruitCardView.swift; sourceTree = "<group>"; };
 		BD4C1E7428C764190057D184 /* StartButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartButtonView.swift; sourceTree = "<group>"; };
 		BD4C1E7628C7691B0057D184 /* OnboardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingView.swift; sourceTree = "<group>"; };
+		BD5AC4BC2970279100DBF270 /* FruitDetailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FruitDetailsView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -113,6 +115,7 @@
 				BD4C1E6228C75AE00057D184 /* FructusApp.swift */,
 				BD4C1E6428C75AE00057D184 /* ContentView.swift */,
 				BD4C1E7628C7691B0057D184 /* OnboardingView.swift */,
+				BD5AC4BC2970279100DBF270 /* FruitDetailsView.swift */,
 			);
 			path = App;
 			sourceTree = "<group>";
@@ -191,6 +194,7 @@
 				BD4C1E7328C75EF00057D184 /* FruitCardView.swift in Sources */,
 				BD45E6D7296ED82400795F49 /* FruitRowView.swift in Sources */,
 				BD4C1E7528C764190057D184 /* StartButtonView.swift in Sources */,
+				BD5AC4BD2970279100DBF270 /* FruitDetailsView.swift in Sources */,
 				BD4C1E6528C75AE00057D184 /* ContentView.swift in Sources */,
 				BD4C1E7728C7691B0057D184 /* OnboardingView.swift in Sources */,
 				BD45E6D2296E96FF00795F49 /* FruitModel.swift in Sources */,

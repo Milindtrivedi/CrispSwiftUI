@@ -34,8 +34,8 @@ struct FruitDetailsView: View {
                             .font(.headline)
                             .multilineTextAlignment(.leading)
                         
-                        //:NUTRIENTS
-                        
+                        //:NUTRIENTS                        
+                        FruitNutrientsView(fruit: fruit)
                         
                         //:SUBHEADLINE
                         Text("Learn more about \(fruit.title)".uppercased())
@@ -63,6 +63,7 @@ struct FruitDetailsView: View {
             }//: SCROLL
             .edgesIgnoringSafeArea(.top)
         }//: NAVIGATION
+        .navigationViewStyle(StackNavigationViewStyle())
     }
 }
 //MARK: - PREVIEW

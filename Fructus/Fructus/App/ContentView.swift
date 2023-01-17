@@ -11,6 +11,9 @@ struct ContentView: View {
     // MARK: - PROPERTIES
     
     var fruits: [Fruit] = fruitsData
+    @State private var isShowingSettings : Bool = false
+    
+    
     
     // MARK: - BODY
     var body: some View {
@@ -30,7 +33,19 @@ struct ContentView: View {
             .listStyle(.plain)
             
             .navigationTitle("Fruits")
+            .navigationBarItems(
+                trailing:
+                    Button(action: {
+                        isShowingSettings = true
+                    }, label: {
+                        Image(systemName: "slider.horizontal.3")
+                    })//: BUTTON
+                    .sheet(isPresented: $isShowingSettings) {
+                        SettingsView()
+                    } 
+            )
         } //: NAVIGATION
+        .navigationViewStyle(StackNavigationViewStyle())
     }
 }
 
@@ -40,6 +55,6 @@ struct ContentView: View {
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
         ContentView(fruits: fruitsData)
-        .previewDevice ("iPhone 11 Pro")
+            .previewDevice ("iPhone 11 Pro")
     }
 }

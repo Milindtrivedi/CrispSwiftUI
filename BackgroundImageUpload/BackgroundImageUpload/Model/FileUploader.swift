@@ -2,20 +2,19 @@
 //  ImageUploaderViewModel.swift
 //  BackgroundImageUpload
 //
-//  Created by Apple on 28/01/23.
+//  Created by Milind Trivedi on 28/01/23.
 //
 
 import Foundation
 import Combine
-import UIKit
 import Dispatch
+import CoreServices
+import UIKit
 
 
 class FileUploader : NSObject {
 
-    let param = ["yourparam" : "one", "yourparam" : "two"]
-    
-    var progress: Float = 0.0
+    let param = ["yourparam" : "one"]
     
     let token = "Bearer yourtokenstringhere"
 
@@ -48,62 +47,159 @@ class FileUploader : NSObject {
         for file in files {
             
             // Wait for a semaphore to be available
-            FileUploader.semaphore.wait()
+            // FileUploader.semaphore.wait() this can be used but you might end up awaiting for a very long time if server doesn't respond and can run into deadlock so we will avoid it and use timeout interval instead
             
-            // Start the upload in the background queue
-            queue.async { [weak self] in
-                
-                // Check if the weak self reference exists
-                guard let self = self else { return }
-                
-                // Create a URL request to the upload URL
-                var request = URLRequest(url: url)
-                request.httpMethod = "POST"
-                
-                //create a multipart form data body for the request
+            let result = FileUploader.semaphore.wait(timeout: .now() + .seconds(5))
             
-                let fileData = try! Data(contentsOf: file)
+            if result == .timedOut {
+                // The semaphore was not available after 5 seconds, handle accordingly
+                print("Semaphore isn't availble even after waiting for 5 seconds so handle accordingly")
                 
-                //created body using a separate function for the ease of adapting change
-                
-                let formData = self.createMultipartFormData(parameters: self.param, fileData: fileData, fileName: file.lastPathComponent, mimeType: "image/jpeg", boundary: "Boundary-\(UUID().uuidString)")
-                
-                // Set the request body and headers
-                
-                request.httpBody = formData
-                
-                // Add token if needed this is just for an example
-                
-                request.addValue(self.token, forHTTPHeaderField: "Authorization")
-                
-                // Create a upload task for the request
-                let task = self.session.uploadTask(with: request, fromFile: file)
- 
-                // Start the task and store it in the upload tasks array
-                task.resume()
-                self.uploadTasks.append(task)
+            } else {
+                // Start the upload in the background queue
+                queue.async { [weak self] in
+                    
+                    // Check if the weak self reference exists
+                    guard let self = self else { return }
+                    
+                    // Create a URL request to the upload URL
+                    var request = URLRequest(url: url)
+                    request.httpMethod = "POST"
+                    
+                    //create a multipart form data body for the request
+                    
+                    let fileData = try! Data(contentsOf: file)
+                    
+                    //created body using a separate function for the ease of adapting change
+                    
+                    //let formData = self.createMultipartFormData(parameters: self.param, fileData: fileData, fileName: file.lastPathComponent, mimeType: self.mimeType(forPathExtension: file.pathExtension), boundary: "Boundary-\(UUID().uuidString)", name: "file")
+                    
+                    let formData = self.createMultipartFormData(parameters: self.param, boundary: "Boundary-\(UUID().uuidString)", data: fileData, mimeType: self.mimeType(forPathExtension: file.pathExtension), filename: file.lastPathComponent)
+                    
+                    // Set the request body and headers
+                    
+                    request.httpBody = formData
+                    
+                    // Add token if needed this is just for an example
+                    
+                    //request.addValue(self.token, forHTTPHeaderField: "Authorization")
+                    
+                    // Create a upload task for the request
+                    let task = self.session.uploadTask(with: request, fromFile: file)
+                    
+                    // Start the task and store it in the upload tasks array
+                    task.resume()
+                    self.uploadTasks.append(task)
+                }
             }
         }
     }
     
-    func createMultipartFormData(parameters: [String: String], fileData: Data, fileName: String, mimeType: String, boundary: String) -> Data {
+//    func createMultipartFormData(parameters: [String: String], filePathKey: String, paths: URL, boundary: String) -> Data {
+//        let boundary = "Boundary-\(UUID().uuidString)"
+//            var body = NSMutableData()
+//
+//            for (key, value) in parameters {
+//                body.append("--\(boundary)\r\n")
+//                body.append("Content-Disposition: form-data; name=\"\(key)\"\r\n\r\n")
+//                body.append("\(value)\r\n")
+//            }
+//
+//            body.append("--\(boundary)\r\n")
+//            body.append("Content-Disposition: form-data; name=\"file\"; filename=\"\(fileName)\"\r\n")
+//            body.append("Content-Type: \(mimeType)\r\n\r\n")
+//            body.append(fileData)
+//            body.append("\r\n")
+//            body.append("--\(boundary)--\r\n")
+//
+//            return body
+        
+        
+//        let multipartFormData = MultipartFormData()
+//
+//
+//        for (key, value) in parameters {
+//            if let temp = value as? String {
+//                multipartFormData.append(temp.data(using: .utf8)!, withName: key)
+//            }
+//            if let temp = value as? Int {
+//                multipartFormData.append("\(temp)".data(using: .utf8)!, withName: key)
+//            }
+//            if let temp = value as? NSArray {
+//                temp.forEach({ element in
+//                    let keyObj = key + "[]"
+//                    if let string = element as? String {
+//                        multipartFormData.append(string.data(using: .utf8)!, withName: keyObj)
+//                    } else
+//                    if let num = element as? Int {
+//                        let value = "\(num)"
+//                        multipartFormData.append(value.data(using: .utf8)!, withName: keyObj)
+//                    }
+//                })
+//            }
+       // }
+        
+      
+                   // multipartFormData.append(paths, withName: filePathKey)
+        
+        
+        
+        
+       // return try! multipartFormData.encode()
+//    }
+    
+    
+    func createMultipartFormData(parameters: [String: String],
+                                boundary: String,
+                                data: Data,
+                                mimeType: String,
+                                filename: String) -> Data {
         let body = NSMutableData()
-
+        
+        let boundaryPrefix = "--\(boundary)\r\n"
+        
         for (key, value) in parameters {
-            body.append("--\(boundary)\r\n".data(using: .utf8)!)
+            body.append(boundaryPrefix.data(using: .utf8)!)
             body.append("Content-Disposition: form-data; name=\"\(key)\"\r\n\r\n".data(using: .utf8)!)
             body.append("\(value)\r\n".data(using: .utf8)!)
         }
         
-        body.append("--\(boundary)\r\n".data(using: .utf8)!)
-        body.append("Content-Disposition: form-data; name=\"file\"; filename=\"\(fileName)\"\r\n".data(using: .utf8)!)
+        body.append(boundaryPrefix.data(using: .utf8)!)
+        body.append("Content-Disposition: form-data; name=\"file\"; filename=\"\(filename)\"\r\n".data(using: .utf8)!)
         body.append("Content-Type: \(mimeType)\r\n\r\n".data(using: .utf8)!)
-        body.append(fileData)
+        body.append(data)
         body.append("\r\n".data(using: .utf8)!)
-        body.append("--\(boundary)--\r\n".data(using: .utf8)!)
+        body.append("--".data(using: .utf8)!)
+        body.append(boundary.data(using: .utf8)!)
+        body.append("--".data(using: .utf8)!)
         
         return body as Data
     }
+
+
+    
+    private func mimeType(forPathExtension pathExtension: String) -> String {
+        if
+            let id = UTTypeCreatePreferredIdentifierForTag(kUTTagClassFilenameExtension, pathExtension as CFString, nil)?.takeRetainedValue(),
+            let contentType = UTTypeCopyPreferredTagWithClass(id, kUTTagClassMIMEType)?.takeRetainedValue()
+        {
+            return contentType as String
+        }
+
+        return "application/octet-stream"
+    }
+    
+    private func contentHeaders(withName name: String, fileName: String? = nil, mimeType: String? = nil) -> [String: String] {
+        var disposition = "form-data; name=\"\(name)\""
+        if let fileName = fileName { disposition += "; filename=\"\(fileName)\"" }
+
+        var headers = ["Content-Disposition": disposition]
+        if let mimeType = mimeType { headers["Content-Type"] = mimeType }
+
+        return headers
+    }
+
+
 }
 
 class BackgroundSessionDelegate: NSObject, URLSessionDelegate, URLSessionTaskDelegate {
@@ -126,14 +222,21 @@ class BackgroundSessionDelegate: NSObject, URLSessionDelegate, URLSessionTaskDel
             print("_____________________________")
             print("File uploaded successfully")
             
-            //HERE's the right time to perform some changes
+            //HERE's the right time to perform some UI changes
         }
+        
+    }
+
+    func urlSession(_ session: URLSession, task: URLSessionTask, didSendBodyData bytesSent: Int64, totalBytesSent: Int64, totalBytesExpectedToSend: Int64) {
+        
+        let progress = Float(totalBytesSent) / Float(totalBytesExpectedToSend)
+        let progressPercentage = Int(progress * 100)
         
     }
     
 }
 
-public func saveImageDocumentDirectoryWithDate(tempImage:UIImage, block : @escaping (_ url: URL?) -> Void ){
+public func saveImageInDocumentDirectory(tempImage:UIImage, block : @escaping (_ url: URL?) -> Void ){
     
     let documentsDirectoryURL = try! FileManager().url(for: .documentDirectory, in: .userDomainMask, appropriateFor: nil, create: true)
     
@@ -160,4 +263,15 @@ public func randomString(length: Int) -> String {
         randomString += NSString(characters: &nextChar, length: 1) as String
     }
     return randomString
+}
+
+//Build input file cannot be found: '/Users/sohilsarkazi/Desktop/BG upload Task/BackgroundImageUpload/BackgroundImageUpload/App/Info.plist'. Did you forget to declare this file as an output of a script phase or custom build rule which produces it?
+
+
+extension String {
+    
+    func toData() -> Data {
+        return self.data(using: .utf8) ?? Data()
+    }
+    
 }

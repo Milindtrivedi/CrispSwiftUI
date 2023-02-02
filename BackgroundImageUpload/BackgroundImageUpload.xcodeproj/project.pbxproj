@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		BD86E598298BCF650094963F /* MultipartFormData.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD86E597298BCF650094963F /* MultipartFormData.swift */; };
 		BDE8F4632984F88E008282B0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDE8F4622984F88E008282B0 /* AppDelegate.swift */; };
 		BDE8F4652984F88E008282B0 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDE8F4642984F88E008282B0 /* SceneDelegate.swift */; };
 		BDE8F46A2984F88E008282B0 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BDE8F4682984F88E008282B0 /* Main.storyboard */; };
@@ -17,6 +18,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		BD86E597298BCF650094963F /* MultipartFormData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MultipartFormData.swift; sourceTree = "<group>"; };
 		BDE8F45F2984F88E008282B0 /* BackgroundImageUpload.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BackgroundImageUpload.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BDE8F4622984F88E008282B0 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		BDE8F4642984F88E008282B0 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -98,6 +100,7 @@
 			isa = PBXGroup;
 			children = (
 				BDE8F47D2984F97B008282B0 /* FileUploader.swift */,
+				BD86E597298BCF650094963F /* MultipartFormData.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -177,6 +180,7 @@
 				BDE8F4652984F88E008282B0 /* SceneDelegate.swift in Sources */,
 				BDE8F47E2984F97B008282B0 /* FileUploader.swift in Sources */,
 				BDE8F47A2984F92C008282B0 /* ImageUploader.swift in Sources */,
+				BD86E598298BCF650094963F /* MultipartFormData.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -325,7 +329,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = "";
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = "/Users/sohilsarkazi/Desktop/BG upload Task/BackgroundImageUpload/BackgroundImageUpload/App/Info.plist";
+				INFOPLIST_FILE = $SRCROOT/BackgroundImageUpload/App/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
@@ -354,7 +358,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = "";
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = "/Users/sohilsarkazi/Desktop/BG upload Task/BackgroundImageUpload/BackgroundImageUpload/App/Info.plist";
+				INFOPLIST_FILE = $SRCROOT/BackgroundImageUpload/App/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;

@@ -14,8 +14,6 @@ import UIKit
 
 class FileUploader : NSObject {
 
-    let param = ["yourparam" : "one"]
-    
     let token = "Bearer yourtokenstringhere"
 
     // Create a semaphore to control the number of concurrent uploads you can just put your file array count here dynamically
@@ -37,14 +35,18 @@ class FileUploader : NSObject {
     
     let delegate = BackgroundSessionDelegate()
     
+    let boundary : String!
+    
     override init() {
         self.session = URLSession(configuration: sessionConfig, delegate: delegate, delegateQueue: nil)
+        boundary = "Boundary-\(UUID().uuidString)"
     }
-  
+
+    
     func uploadFiles(files: [URL], to url: URL) {
         
         // Iterate over the file URLs
-        for file in files {
+     
             
             // Wait for a semaphore to be available
             // FileUploader.semaphore.wait() this can be used but you might end up awaiting for a very long time if server doesn't respond and can run into deadlock so we will avoid it and use timeout interval instead
@@ -65,118 +67,36 @@ class FileUploader : NSObject {
                     // Create a URL request to the upload URL
                     var request = URLRequest(url: url)
                     request.httpMethod = "POST"
-                    
+                    request.allHTTPHeaderFields = ["Accept": "application/json", "Content-Type": "multipart/form-data; boundary=\(String(describing: self.boundary))"]
+                   
                     //create a multipart form data body for the request
                     
-                    let fileData = try! Data(contentsOf: file)
+                    //let fileData = try! Data(contentsOf: file)
                     
                     //created body using a separate function for the ease of adapting change
                     
-                    //let formData = self.createMultipartFormData(parameters: self.param, fileData: fileData, fileName: file.lastPathComponent, mimeType: self.mimeType(forPathExtension: file.pathExtension), boundary: "Boundary-\(UUID().uuidString)", name: "file")
-                    
-                    let formData = self.createMultipartFormData(parameters: self.param, boundary: "Boundary-\(UUID().uuidString)", data: fileData, mimeType: self.mimeType(forPathExtension: file.pathExtension), filename: file.lastPathComponent)
-                    
+
+                    let formData = self.createDataBody(withParameters: ["yourparam" : "one"], media: files, boundary: self.boundary, keyPath: "file")
                     // Set the request body and headers
                     
                     request.httpBody = formData
                     
                     // Add token if needed this is just for an example
                     
-                    //request.addValue(self.token, forHTTPHeaderField: "Authorization")
+                    // request.addValue(self.token, forHTTPHeaderField: "Authorization")
                     
                     // Create a upload task for the request
-                    let task = self.session.uploadTask(with: request, fromFile: file)
                     
-                    // Start the task and store it in the upload tasks array
-                    task.resume()
-                    self.uploadTasks.append(task)
+                   for uploadingfiles in files {
+                    let task = self.session.uploadTask(with: request, fromFile: uploadingfiles)
+                        // Start the task and store it in the upload tasks array
+                        task.resume()
+                        self.uploadTasks.append(task)
+                   }
                 }
-            }
+            
         }
     }
-    
-//    func createMultipartFormData(parameters: [String: String], filePathKey: String, paths: URL, boundary: String) -> Data {
-//        let boundary = "Boundary-\(UUID().uuidString)"
-//            var body = NSMutableData()
-//
-//            for (key, value) in parameters {
-//                body.append("--\(boundary)\r\n")
-//                body.append("Content-Disposition: form-data; name=\"\(key)\"\r\n\r\n")
-//                body.append("\(value)\r\n")
-//            }
-//
-//            body.append("--\(boundary)\r\n")
-//            body.append("Content-Disposition: form-data; name=\"file\"; filename=\"\(fileName)\"\r\n")
-//            body.append("Content-Type: \(mimeType)\r\n\r\n")
-//            body.append(fileData)
-//            body.append("\r\n")
-//            body.append("--\(boundary)--\r\n")
-//
-//            return body
-        
-        
-//        let multipartFormData = MultipartFormData()
-//
-//
-//        for (key, value) in parameters {
-//            if let temp = value as? String {
-//                multipartFormData.append(temp.data(using: .utf8)!, withName: key)
-//            }
-//            if let temp = value as? Int {
-//                multipartFormData.append("\(temp)".data(using: .utf8)!, withName: key)
-//            }
-//            if let temp = value as? NSArray {
-//                temp.forEach({ element in
-//                    let keyObj = key + "[]"
-//                    if let string = element as? String {
-//                        multipartFormData.append(string.data(using: .utf8)!, withName: keyObj)
-//                    } else
-//                    if let num = element as? Int {
-//                        let value = "\(num)"
-//                        multipartFormData.append(value.data(using: .utf8)!, withName: keyObj)
-//                    }
-//                })
-//            }
-       // }
-        
-      
-                   // multipartFormData.append(paths, withName: filePathKey)
-        
-        
-        
-        
-       // return try! multipartFormData.encode()
-//    }
-    
-    
-    func createMultipartFormData(parameters: [String: String],
-                                boundary: String,
-                                data: Data,
-                                mimeType: String,
-                                filename: String) -> Data {
-        let body = NSMutableData()
-        
-        let boundaryPrefix = "--\(boundary)\r\n"
-        
-        for (key, value) in parameters {
-            body.append(boundaryPrefix.data(using: .utf8)!)
-            body.append("Content-Disposition: form-data; name=\"\(key)\"\r\n\r\n".data(using: .utf8)!)
-            body.append("\(value)\r\n".data(using: .utf8)!)
-        }
-        
-        body.append(boundaryPrefix.data(using: .utf8)!)
-        body.append("Content-Disposition: form-data; name=\"file\"; filename=\"\(filename)\"\r\n".data(using: .utf8)!)
-        body.append("Content-Type: \(mimeType)\r\n\r\n".data(using: .utf8)!)
-        body.append(data)
-        body.append("\r\n".data(using: .utf8)!)
-        body.append("--".data(using: .utf8)!)
-        body.append(boundary.data(using: .utf8)!)
-        body.append("--".data(using: .utf8)!)
-        
-        return body as Data
-    }
-
-
     
     private func mimeType(forPathExtension pathExtension: String) -> String {
         if
@@ -189,17 +109,39 @@ class FileUploader : NSObject {
         return "application/octet-stream"
     }
     
-    private func contentHeaders(withName name: String, fileName: String? = nil, mimeType: String? = nil) -> [String: String] {
-        var disposition = "form-data; name=\"\(name)\""
-        if let fileName = fileName { disposition += "; filename=\"\(fileName)\"" }
+    func createDataBody(withParameters params: [String: String]?, media: [URL], boundary: String, keyPath: String) -> Data {
 
-        var headers = ["Content-Disposition": disposition]
-        if let mimeType = mimeType { headers["Content-Type"] = mimeType }
+        let lineBreak = "\r\n"
+        let body = NSMutableData()
 
-        return headers
+        if let parameters = params {
+            for (key, value) in parameters {
+                body.appendString("--\(boundary + lineBreak)")
+                body.appendString("Content-Disposition: form-data; name=\"\(key)\"\(lineBreak + lineBreak)")
+                body.appendString("\(value + lineBreak)")
+            }
+        }
+
+      
+            for photo in media {
+                body.appendString("--\(boundary + lineBreak)")
+                body.appendString("Content-Disposition: form-data; name=\"\(keyPath)\"; filename=\"\(photo.lastPathComponent)\"\(lineBreak)")
+                body.appendString("Content-Type: \(self.mimeType(forPathExtension: photo.pathExtension) + lineBreak + lineBreak)")
+                
+                do  {
+                    let data = try Data(contentsOf: photo)
+                    body.append(data)
+                } catch let err {
+                    print(err.localizedDescription)
+                }
+                body.appendString(lineBreak)
+            }
+        
+
+        body.appendString("--\(boundary)--\(lineBreak)")
+
+        return body as Data
     }
-
-
 }
 
 class BackgroundSessionDelegate: NSObject, URLSessionDelegate, URLSessionTaskDelegate {
@@ -232,6 +174,7 @@ class BackgroundSessionDelegate: NSObject, URLSessionDelegate, URLSessionTaskDel
         let progress = Float(totalBytesSent) / Float(totalBytesExpectedToSend)
         let progressPercentage = Int(progress * 100)
         
+        print("Progress >>\(String(describing: progress))", "Percentage >>\(String(describing: progressPercentage))")
     }
     
 }
@@ -265,13 +208,11 @@ public func randomString(length: Int) -> String {
     return randomString
 }
 
-//Build input file cannot be found: '/Users/sohilsarkazi/Desktop/BG upload Task/BackgroundImageUpload/BackgroundImageUpload/App/Info.plist'. Did you forget to declare this file as an output of a script phase or custom build rule which produces it?
 
-
-extension String {
-    
-    func toData() -> Data {
-        return self.data(using: .utf8) ?? Data()
+extension NSMutableData {
+  func appendString(_ string: String) {
+    if let data = string.data(using: .utf8) {
+      self.append(data)
     }
-    
+  }
 }

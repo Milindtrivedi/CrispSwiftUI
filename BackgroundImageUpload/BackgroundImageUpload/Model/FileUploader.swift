@@ -33,10 +33,13 @@ class FileUploader : NSObject {
     // Create an array to store the upload tasks
     private var uploadTasks: [URLSessionUploadTask] = []
     
+    // Session delegates to handle response because you won't be able to execute closures in background config
     let delegate = BackgroundSessionDelegate()
     
+    // Separate different parts of the multi-part form data in the HTTP request body
     let boundary : String!
     
+    // used for checking whether semaphore is available or not
     let result: DispatchTimeoutResult
     
     override init() {
@@ -45,16 +48,13 @@ class FileUploader : NSObject {
         result = FileUploader.semaphore.wait(timeout: .now() + .seconds(5))
     }
     
-    
     func uploadFiles(files: [URL], to url: URL) {
         
         // Iterate over the file URLs
         
         for file in files {
             // Wait for a semaphore to be available
-            // FileUploader.semaphore.wait() this can be used but you might end up awaiting for a very long time if server doesn't respond and can run into deadlock so we will avoid it and use timeout interval instead
-            
-            
+            // FileUploader.semaphore.wait() this can be used but you might end up awaiting for a very long time if server doesn't respond and can run into deadlock so we will avoid it and use timeout interval instead typically it is far more than 5 seconds
             
             if result == .timedOut {
                 // The semaphore was not available after 5 seconds, handle accordingly
@@ -75,32 +75,24 @@ class FileUploader : NSObject {
                     
                     request.httpMethod = "POST"
                     
-                    
-                    //create a multipart form data body for the request
-                    
-                    //let fileData = try! Data(contentsOf: file)
-                    
                     //created body using a separate function for the ease of adapting change
+                    let uploadImageParams = ["name":"Milind", "age" : "22"]
                     
-                    
-                    let formData = self.createDataBody(withParameters: ["file" : "one"], media: file, boundary: self.boundary, keyPath: "file")
+                    let formData = self.createDataBody(withParameters: ["keyone" : "valone"], media: file, boundary: self.boundary, keyPath: "file")
                     // Set the request body and headers
                     
                     request.httpBody = formData
                     
                     // Add token if needed this is just for an example
                     
-                    // request.addValue(self.token, forHTTPHeaderField: "Authorization")
+                    request.addValue(self.token, forHTTPHeaderField: "Authorization")
                     
                     // Create a upload task for the request
-                    
-                    //                    for uploadingfiles in files {j
                     let task = self.session.uploadTask(with: request, fromFile: file)
+                    
                     // Start the task and store it in the upload tasks array
                     task.resume()
                     self.uploadTasks.append(task)
-                    
-                    //}
                 }
             }
         }
@@ -130,22 +122,17 @@ class FileUploader : NSObject {
             }
         }
         
+        body.appendString("--\(boundary + lineBreak)")
+        body.appendString("Content-Disposition: form-data; name=\"\(keyPath)\"; filename=\"\(media.lastPathComponent)\"\(lineBreak)")
+        body.appendString("Content-Type: \(self.mimeType(forPathExtension: media.pathExtension) + lineBreak + lineBreak)")
         
-//        for photo in media {
-            body.appendString("--\(boundary + lineBreak)")
-            body.appendString("Content-Disposition: form-data; name=\"\(keyPath)\"; filename=\"\(media.lastPathComponent)\"\(lineBreak)")
-            body.appendString("Content-Type: \(self.mimeType(forPathExtension: media.pathExtension) + lineBreak + lineBreak)")
-            
-            do  {
-                let data = try Data(contentsOf: media)
-                body.append(data)
-            } catch let err {
-                print(err.localizedDescription)
-            }
-            body.appendString(lineBreak)
-//        }
-        
-        
+        do  {
+            let data = try Data(contentsOf: media)
+            body.append(data)
+        } catch let err {
+            print(err.localizedDescription)
+        }
+        body.appendString(lineBreak)
         body.appendString("--\(boundary)--\(lineBreak)")
         
         return body as Data
@@ -165,13 +152,12 @@ class BackgroundSessionDelegate: NSObject, URLSessionDelegate, URLSessionTaskDel
         } else {
             // Handle the success
             FileUploader.semaphore.signal()
-            let response = task.response as? HTTPURLResponse
-            print("_____________________________")
-            print("STATUS CODE :" ,String(describing: response?.statusCode))
-            print("RESPONSE :" ,String(describing: response))
-            print("_____________________________")
-            print("File uploaded successfully")
-            
+            if let response = task.response as? HTTPURLResponse {
+                print("_____________________________")
+                print("STATUS CODE :" ,String(describing: response.statusCode))
+                print("RESPONSE :" ,String(describing: response))
+                print("_____________________________")
+            }
             //HERE's the right time to perform some UI changes
         }
         

@@ -13,9 +13,9 @@ import UIKit
 
 
 class FileUploader : NSObject {
-
+    
     let token = "Bearer yourtokenstringhere"
-
+    
     // Create a semaphore to control the number of concurrent uploads you can just put your file array count here dynamically
     static let semaphore = DispatchSemaphore(value: 5)
     
@@ -23,7 +23,7 @@ class FileUploader : NSObject {
     private let queue = DispatchQueue(label: "com.example.fileUploader.queue", qos: .background)
     
     // Create URL session configurations and add an identifier to it
-
+    
     private let sessionConfig = URLSessionConfiguration.background(withIdentifier: "com.yourdomain.uploadfiles")
     
     // Create a URL session to perform the uploads
@@ -37,21 +37,24 @@ class FileUploader : NSObject {
     
     let boundary : String!
     
+    let result: DispatchTimeoutResult
+    
     override init() {
         self.session = URLSession(configuration: sessionConfig, delegate: delegate, delegateQueue: nil)
         boundary = "Boundary-\(UUID().uuidString)"
+        result = FileUploader.semaphore.wait(timeout: .now() + .seconds(5))
     }
-
+    
     
     func uploadFiles(files: [URL], to url: URL) {
         
         // Iterate over the file URLs
-     
-            
+        
+        for file in files {
             // Wait for a semaphore to be available
             // FileUploader.semaphore.wait() this can be used but you might end up awaiting for a very long time if server doesn't respond and can run into deadlock so we will avoid it and use timeout interval instead
             
-            let result = FileUploader.semaphore.wait(timeout: .now() + .seconds(5))
+            
             
             if result == .timedOut {
                 // The semaphore was not available after 5 seconds, handle accordingly
@@ -66,17 +69,21 @@ class FileUploader : NSObject {
                     
                     // Create a URL request to the upload URL
                     var request = URLRequest(url: url)
+                    
+                    request.addValue("application/json", forHTTPHeaderField: "Accept")
+                    request.addValue("multipart/form-data; boundary=\(String(describing: self.boundary!))", forHTTPHeaderField: "Content-Type")
+                    
                     request.httpMethod = "POST"
-                    request.allHTTPHeaderFields = ["Accept": "application/json", "Content-Type": "multipart/form-data; boundary=\(String(describing: self.boundary))"]
-                   
+                    
+                    
                     //create a multipart form data body for the request
                     
                     //let fileData = try! Data(contentsOf: file)
                     
                     //created body using a separate function for the ease of adapting change
                     
-
-                    let formData = self.createDataBody(withParameters: ["yourparam" : "one"], media: files, boundary: self.boundary, keyPath: "file")
+                    
+                    let formData = self.createDataBody(withParameters: ["file" : "one"], media: file, boundary: self.boundary, keyPath: "file")
                     // Set the request body and headers
                     
                     request.httpBody = formData
@@ -87,14 +94,15 @@ class FileUploader : NSObject {
                     
                     // Create a upload task for the request
                     
-                   for uploadingfiles in files {
-                    let task = self.session.uploadTask(with: request, fromFile: uploadingfiles)
-                        // Start the task and store it in the upload tasks array
-                        task.resume()
-                        self.uploadTasks.append(task)
-                   }
+                    //                    for uploadingfiles in files {j
+                    let task = self.session.uploadTask(with: request, fromFile: file)
+                    // Start the task and store it in the upload tasks array
+                    task.resume()
+                    self.uploadTasks.append(task)
+                    
+                    //}
                 }
-            
+            }
         }
     }
     
@@ -105,15 +113,15 @@ class FileUploader : NSObject {
         {
             return contentType as String
         }
-
+        
         return "application/octet-stream"
     }
     
-    func createDataBody(withParameters params: [String: String]?, media: [URL], boundary: String, keyPath: String) -> Data {
-
+    func createDataBody(withParameters params: [String: String]?, media: URL, boundary: String, keyPath: String) -> Data {
+        
         let lineBreak = "\r\n"
         let body = NSMutableData()
-
+        
         if let parameters = params {
             for (key, value) in parameters {
                 body.appendString("--\(boundary + lineBreak)")
@@ -121,25 +129,25 @@ class FileUploader : NSObject {
                 body.appendString("\(value + lineBreak)")
             }
         }
-
-      
-            for photo in media {
-                body.appendString("--\(boundary + lineBreak)")
-                body.appendString("Content-Disposition: form-data; name=\"\(keyPath)\"; filename=\"\(photo.lastPathComponent)\"\(lineBreak)")
-                body.appendString("Content-Type: \(self.mimeType(forPathExtension: photo.pathExtension) + lineBreak + lineBreak)")
-                
-                do  {
-                    let data = try Data(contentsOf: photo)
-                    body.append(data)
-                } catch let err {
-                    print(err.localizedDescription)
-                }
-                body.appendString(lineBreak)
-            }
         
-
+        
+//        for photo in media {
+            body.appendString("--\(boundary + lineBreak)")
+            body.appendString("Content-Disposition: form-data; name=\"\(keyPath)\"; filename=\"\(media.lastPathComponent)\"\(lineBreak)")
+            body.appendString("Content-Type: \(self.mimeType(forPathExtension: media.pathExtension) + lineBreak + lineBreak)")
+            
+            do  {
+                let data = try Data(contentsOf: media)
+                body.append(data)
+            } catch let err {
+                print(err.localizedDescription)
+            }
+            body.appendString(lineBreak)
+//        }
+        
+        
         body.appendString("--\(boundary)--\(lineBreak)")
-
+        
         return body as Data
     }
 }
@@ -168,7 +176,7 @@ class BackgroundSessionDelegate: NSObject, URLSessionDelegate, URLSessionTaskDel
         }
         
     }
-
+    
     func urlSession(_ session: URLSession, task: URLSessionTask, didSendBodyData bytesSent: Int64, totalBytesSent: Int64, totalBytesExpectedToSend: Int64) {
         
         let progress = Float(totalBytesSent) / Float(totalBytesExpectedToSend)
@@ -210,9 +218,21 @@ public func randomString(length: Int) -> String {
 
 
 extension NSMutableData {
-  func appendString(_ string: String) {
-    if let data = string.data(using: .utf8) {
-      self.append(data)
+    func appendString(_ string: String) {
+        if let data = string.data(using: .utf8) {
+            self.append(data)
+        }
     }
-  }
+}
+
+
+public func DeleteAllDocumentsFromDirectory() throws {
+    let documentsUrl =  FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
+    do {
+        let fileURLs = try FileManager.default.contentsOfDirectory(at: documentsUrl,includingPropertiesForKeys: nil,options: .skipsHiddenFiles)
+        for fileURL in fileURLs {
+            try FileManager.default.removeItem(at: fileURL)
+        }
+    } catch  { print(error) }
+    
 }

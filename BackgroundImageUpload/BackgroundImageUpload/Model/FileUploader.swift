@@ -17,7 +17,7 @@ class FileUploader : NSObject {
     let token = "Bearer yourtokenstringhere"
     
     // Create a semaphore to control the number of concurrent uploads you can just put your file array count here dynamically
-    static let semaphore = DispatchSemaphore(value: 5)
+    static let semaphore = DispatchSemaphore(value: 10)
     
     // Create a background queue to perform the uploads
     private let queue = DispatchQueue(label: "com.example.fileUploader.queue", qos: .background)
@@ -31,7 +31,7 @@ class FileUploader : NSObject {
     private var session : URLSession
     
     // Create an array to store the upload tasks
-    private var uploadTasks: [URLSessionUploadTask] = []
+    private var uploadTasks: [URLSessionDataTask] = []
     
     // Session delegates to handle response because you won't be able to execute closures in background config
     let delegate = BackgroundSessionDelegate()
@@ -78,7 +78,7 @@ class FileUploader : NSObject {
                     //created body using a separate function for the ease of adapting change
                     let uploadImageParams = ["name":"Milind", "age" : "22"]
                     
-                    let formData = self.createDataBody(withParameters: ["keyone" : "valone"], media: file, boundary: self.boundary, keyPath: "file")
+                    let formData = self.createDataBody(withParameters: uploadImageParams, media: file, boundary: self.boundary, keyPath: "file")
                     // Set the request body and headers
                     
                     request.httpBody = formData
@@ -88,7 +88,8 @@ class FileUploader : NSObject {
                     request.addValue(self.token, forHTTPHeaderField: "Authorization")
                     
                     // Create a upload task for the request
-                    let task = self.session.uploadTask(with: request, fromFile: file)
+                    //let task = self.session.uploadTask(with: request, fromFile: file)
+                    let task = self.session.dataTask(with: request)
                     
                     // Start the task and store it in the upload tasks array
                     task.resume()
@@ -158,9 +159,7 @@ class BackgroundSessionDelegate: NSObject, URLSessionDelegate, URLSessionTaskDel
                 print("RESPONSE :" ,String(describing: response))
                 print("_____________________________")
             }
-            //HERE's the right time to perform some UI changes
         }
-        
     }
     
     func urlSession(_ session: URLSession, task: URLSessionTask, didSendBodyData bytesSent: Int64, totalBytesSent: Int64, totalBytesExpectedToSend: Int64) {

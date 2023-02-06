@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		BD8FA3302991143800BF606C /* BackgroundImageUploadTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD8FA32F2991143800BF606C /* BackgroundImageUploadTests.swift */; };
+		BD8FA3362991160600BF606C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BDE8F46B2984F88F008282B0 /* Assets.xcassets */; };
+		BD8FA337299117D800BF606C /* FileUploader.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDE8F47D2984F97B008282B0 /* FileUploader.swift */; };
 		BDE8F4632984F88E008282B0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDE8F4622984F88E008282B0 /* AppDelegate.swift */; };
 		BDE8F4652984F88E008282B0 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDE8F4642984F88E008282B0 /* SceneDelegate.swift */; };
 		BDE8F46A2984F88E008282B0 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BDE8F4682984F88E008282B0 /* Main.storyboard */; };
@@ -16,7 +19,19 @@
 		BDE8F47E2984F97B008282B0 /* FileUploader.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDE8F47D2984F97B008282B0 /* FileUploader.swift */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXContainerItemProxy section */
+		BD8FA3312991143800BF606C /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = BDE8F4572984F88E008282B0 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = BDE8F45E2984F88E008282B0;
+			remoteInfo = BackgroundImageUpload;
+		};
+/* End PBXContainerItemProxy section */
+
 /* Begin PBXFileReference section */
+		BD8FA32D2991143800BF606C /* BackgroundImageUploadTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BackgroundImageUploadTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		BD8FA32F2991143800BF606C /* BackgroundImageUploadTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackgroundImageUploadTests.swift; sourceTree = "<group>"; };
 		BDE8F45F2984F88E008282B0 /* BackgroundImageUpload.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BackgroundImageUpload.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BDE8F4622984F88E008282B0 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		BDE8F4642984F88E008282B0 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -29,6 +44,13 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		BD8FA32A2991143800BF606C /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		BDE8F45C2984F88E008282B0 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -39,10 +61,19 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		BD8FA32E2991143800BF606C /* BackgroundImageUploadTests */ = {
+			isa = PBXGroup;
+			children = (
+				BD8FA32F2991143800BF606C /* BackgroundImageUploadTests.swift */,
+			);
+			path = BackgroundImageUploadTests;
+			sourceTree = "<group>";
+		};
 		BDE8F4562984F88E008282B0 = {
 			isa = PBXGroup;
 			children = (
 				BDE8F4612984F88E008282B0 /* BackgroundImageUpload */,
+				BD8FA32E2991143800BF606C /* BackgroundImageUploadTests */,
 				BDE8F4602984F88E008282B0 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -51,6 +82,7 @@
 			isa = PBXGroup;
 			children = (
 				BDE8F45F2984F88E008282B0 /* BackgroundImageUpload.app */,
+				BD8FA32D2991143800BF606C /* BackgroundImageUploadTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -105,6 +137,24 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		BD8FA32C2991143800BF606C /* BackgroundImageUploadTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = BD8FA3332991143800BF606C /* Build configuration list for PBXNativeTarget "BackgroundImageUploadTests" */;
+			buildPhases = (
+				BD8FA3292991143800BF606C /* Sources */,
+				BD8FA32A2991143800BF606C /* Frameworks */,
+				BD8FA32B2991143800BF606C /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				BD8FA3322991143800BF606C /* PBXTargetDependency */,
+			);
+			name = BackgroundImageUploadTests;
+			productName = BackgroundImageUploadTests;
+			productReference = BD8FA32D2991143800BF606C /* BackgroundImageUploadTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 		BDE8F45E2984F88E008282B0 /* BackgroundImageUpload */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = BDE8F4732984F88F008282B0 /* Build configuration list for PBXNativeTarget "BackgroundImageUpload" */;
@@ -132,6 +182,10 @@
 				LastSwiftUpdateCheck = 1420;
 				LastUpgradeCheck = 1420;
 				TargetAttributes = {
+					BD8FA32C2991143800BF606C = {
+						CreatedOnToolsVersion = 14.2;
+						TestTargetID = BDE8F45E2984F88E008282B0;
+					};
 					BDE8F45E2984F88E008282B0 = {
 						CreatedOnToolsVersion = 14.2;
 					};
@@ -151,11 +205,20 @@
 			projectRoot = "";
 			targets = (
 				BDE8F45E2984F88E008282B0 /* BackgroundImageUpload */,
+				BD8FA32C2991143800BF606C /* BackgroundImageUploadTests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		BD8FA32B2991143800BF606C /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				BD8FA3362991160600BF606C /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		BDE8F45D2984F88E008282B0 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -169,6 +232,15 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		BD8FA3292991143800BF606C /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				BD8FA3302991143800BF606C /* BackgroundImageUploadTests.swift in Sources */,
+				BD8FA337299117D800BF606C /* FileUploader.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		BDE8F45B2984F88E008282B0 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -181,6 +253,14 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		BD8FA3322991143800BF606C /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = BDE8F45E2984F88E008282B0 /* BackgroundImageUpload */;
+			targetProxy = BD8FA3312991143800BF606C /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		BDE8F4682984F88E008282B0 /* Main.storyboard */ = {
@@ -202,6 +282,40 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		BD8FA3342991143800BF606C /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.milind.BackgroundImageUploadTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/BackgroundImageUpload.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/BackgroundImageUpload";
+			};
+			name = Debug;
+		};
+		BD8FA3352991143800BF606C /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.milind.BackgroundImageUploadTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/BackgroundImageUpload.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/BackgroundImageUpload";
+			};
+			name = Release;
+		};
 		BDE8F4712984F88F008282B0 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -377,6 +491,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		BD8FA3332991143800BF606C /* Build configuration list for PBXNativeTarget "BackgroundImageUploadTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				BD8FA3342991143800BF606C /* Debug */,
+				BD8FA3352991143800BF606C /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		BDE8F45A2984F88E008282B0 /* Build configuration list for PBXProject "BackgroundImageUpload" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (

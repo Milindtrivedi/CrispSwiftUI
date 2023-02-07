@@ -31,7 +31,7 @@ class FileUploader : NSObject {
     private var session : URLSession
     
     // Create an array to store the upload tasks
-    private var uploadTasks: [URLSessionDataTask] = []
+    var uploadTasks: [URLSessionDataTask] = []
     
     // Session delegates to handle response because you won't be able to execute closures in background config
     let delegate = BackgroundSessionDelegate()
@@ -142,6 +142,8 @@ class FileUploader : NSObject {
 
 class BackgroundSessionDelegate: NSObject, URLSessionDelegate, URLSessionTaskDelegate {
     
+    var response : HTTPURLResponse!
+    
     func urlSession(_ session: URLSession, task: URLSessionTask, didCompleteWithError error: Error?) {
         
         if let error = error {
@@ -153,11 +155,12 @@ class BackgroundSessionDelegate: NSObject, URLSessionDelegate, URLSessionTaskDel
         } else {
             // Handle the success
             FileUploader.semaphore.signal()
-            if let response = task.response as? HTTPURLResponse {
+            if let resp = task.response as? HTTPURLResponse {
                 print("_____________________________")
-                print("STATUS CODE :" ,String(describing: response.statusCode))
-                print("RESPONSE :" ,String(describing: response))
+                print("STATUS CODE :" ,String(describing: resp.statusCode))
+                print("RESPONSE :" ,String(describing: resp))
                 print("_____________________________")
+                response = resp
             }
         }
     }

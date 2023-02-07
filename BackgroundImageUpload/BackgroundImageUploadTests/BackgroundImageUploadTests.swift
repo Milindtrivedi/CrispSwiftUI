@@ -18,7 +18,6 @@ final class BackgroundImageUploadTests: XCTestCase {
     override func setUp() {
         super.setUp()
         model = FileUploader()
-        
         for _ in 0...1 {
             for images in 1...10 {
                 arrayOfImage.append(UIImage(named: String(describing: images)) ?? UIImage())
@@ -29,12 +28,14 @@ final class BackgroundImageUploadTests: XCTestCase {
                 }
             }
         }
-        
     }
     
     override func tearDown() {
         super.tearDown()
+        try! DeleteAllDocumentsFromDirectory()
         model = nil
+        arrayOfImage = []
+        arrofURL = []
     }
     
     
@@ -46,17 +47,18 @@ final class BackgroundImageUploadTests: XCTestCase {
         XCTAssertEqual(model.uploadTasks.count, arrofURL.count, "All files not uploaded")
     }
     
+    //Here in this Test we will just upload a single item and validate response
     func testResponse() {
         let expectation = self.expectation(description: "Upload complete")
         model.uploadFiles(files: [arrofURL.first!], to: serverUrl)
-        // Wait for 5 seconds to allow the uploads to complete
+        // Wait for a second to allow the uploads to complete as this is just "1" Single file
         sleep(1)
         for task in model.uploadTasks {
             task.resume()
             task.cancel()
             // Check the response
             guard let resp = task.response as? HTTPURLResponse else {
-                XCTAssertFalse(true, "Response Failed")
+                XCTAssertFalse(true, "Failed to get a response")
                 return
             }
             XCTAssertEqual(resp.statusCode, 200, "Wrong response returned")

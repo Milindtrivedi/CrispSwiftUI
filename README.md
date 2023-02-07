@@ -7,21 +7,21 @@
 
 	Prerequisites: 
 
-	1. Install Python 3.8 using 
+1. Install Python 3.8 using 
 
-			 $ sudo apt-get update
-			 $ sudo apt-get install python3.8
+	    $ sudo apt-get update
+	    $ sudo apt-get install python3.8
 
-					or
+			or
 
-			$ brew update 
-			$ brew install python
+	    $ brew update 
+	    $ brew install python
 
-	2. Install ‘FLASK’ in your python environment by
+2. Install ‘FLASK’ in your python environment by
 
- 			pip3 install Flask
+ 	    pip3 install Flask
 
-	3. Create a Folder with the name of your choice 
+3. Create a Folder with the name of your choice 
 	- Something Like this
 	
 <img width="128" alt="image" src="https://user-images.githubusercontent.com/15359399/217231125-110f0579-02ae-48fa-a1ed-8642f9a00ab1.png">
@@ -71,7 +71,11 @@
 <img width="958" alt="image" src="https://user-images.githubusercontent.com/15359399/217234250-5e228161-a9ce-4772-b3e8-866860b0cdfc.png">
 
 
-8. Run the iOS app on physical device and simulator and check the images, timings and results. You should see something like this
+8. Run the iOS app on physical device by registering your bundle ID and adding provisional profiles and quickly in simulator without any changes. Make sure to check Unit Test File in the project with which you can test the image upload, concurrency and response results. 
 
-<img width="1440" alt="Screenshot 2023-02-04 at 4 59 39 PM" src="https://user-images.githubusercontent.com/15359399/216788228-7574f569-07a5-4344-91c6-717a467e3923.png">
+
+9. Please feel free to use any code in this repository. If it helps please give it a star and if any queries do reach us out on milindtrivedi47@gmail.com 
+
+		Disclaimer: I do not claim any app ideas apart from "Background Image Upload":
+		I have taken references from https://credo.academy/swiftui-course.html 
 

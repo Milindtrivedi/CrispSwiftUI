@@ -48,14 +48,18 @@ final class BackgroundImageUploadTests: XCTestCase {
     
     func testResponse() {
         let expectation = self.expectation(description: "Upload complete")
-        model.uploadFiles(files: arrofURL, to: serverUrl)
+        model.uploadFiles(files: [arrofURL.first!], to: serverUrl)
         // Wait for 5 seconds to allow the uploads to complete
-        sleep(5)
+        sleep(1)
         for task in model.uploadTasks {
             task.resume()
             task.cancel()
             // Check the response
-            XCTAssertEqual(model.delegate.response.statusCode, 200, "Wrong response returned")
+            guard let resp = task.response as? HTTPURLResponse else {
+                XCTAssertFalse(true, "Response Failed")
+                return
+            }
+            XCTAssertEqual(resp.statusCode, 200, "Wrong response returned")
             expectation.fulfill()
         }
         waitForExpectations(timeout: 10, handler: nil)

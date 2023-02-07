@@ -142,8 +142,6 @@ class FileUploader : NSObject {
 
 class BackgroundSessionDelegate: NSObject, URLSessionDelegate, URLSessionTaskDelegate {
     
-    var response : HTTPURLResponse!
-    
     func urlSession(_ session: URLSession, task: URLSessionTask, didCompleteWithError error: Error?) {
         
         if let error = error {
@@ -160,7 +158,6 @@ class BackgroundSessionDelegate: NSObject, URLSessionDelegate, URLSessionTaskDel
                 print("STATUS CODE :" ,String(describing: resp.statusCode))
                 print("RESPONSE :" ,String(describing: resp))
                 print("_____________________________")
-                response = resp
             }
         }
     }

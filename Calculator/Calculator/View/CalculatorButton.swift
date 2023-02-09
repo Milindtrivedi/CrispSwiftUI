@@ -2,7 +2,7 @@
 //  CalculatorButton.swift
 //  Calculator
 //
-//  Created by Apple on 09/02/23.
+//  Created by Milind on 09/02/23.
 //
 
 import SwiftUI
@@ -94,7 +94,7 @@ struct CalculatorButton: View {
                 .cornerRadius(buttonSize / 2)
                 .frame(width: spannedWidth, height: buttonSize)
                 .background(shouldInvertColor ? FG : self.isTouching ? (BGHover ?? BG) : BG)
-                .animation(shouldInvertColor ? .spring() : self.isTouching ? nil : .spring())
+                .animation(Animation.spring(), value: shouldInvertColor || self.isTouching)
                 .cornerRadius(buttonSize / 2)
                 .gesture(
                     DragGesture(minimumDistance: 0)
@@ -110,7 +110,7 @@ struct CalculatorButton: View {
                         .onEnded({ (touch) in
                             self.onMoveEnd()
                         }
-                                )
+                     )
                 )
             Group {
                 // use image if given, otherwise use text
@@ -122,7 +122,8 @@ struct CalculatorButton: View {
                         .frame(width: buttonSize / 3, height: buttonSize / 3)
                         .padding(buttonSize / 3)
                         .foregroundColor(shouldInvertColor ? BG : FG)
-                        .animation(.spring())
+                        .animation(Animation.spring(), value: 1.0)
+                    
                     
                 } else {
                     Text(text)
@@ -131,7 +132,7 @@ struct CalculatorButton: View {
                         .minimumScaleFactor(0.01)
                         .padding(buttonSize / 4)
                         .foregroundColor(shouldInvertColor ? BG : FG)
-                        .animation(.spring())
+                        .animation(Animation.spring(), value: 1.0)
                 }
             }
         }

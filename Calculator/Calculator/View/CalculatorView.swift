@@ -2,7 +2,7 @@
 //  CalculatorView.swift
 //  Calculator
 //
-//  Created by Apple on 09/02/23.
+//  Created by Milind on 09/02/23.
 //
 
 import SwiftUI

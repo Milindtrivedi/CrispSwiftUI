@@ -11,16 +11,16 @@ import Foundation
 struct CalculatorViewModel {
     
     private var selectedOperator: ButtonType? = nil
-    private var ans: Double = 0
-    private var inputs: String =  ""
-    private var isError = false
-    private var isNegative = false
-    private var lastInput: Double = 0
-    private let maxInput = 9
-    private let formatterUpperBreakPoint = 999999999.9
-    private let formatterLowerBreakPoint = 0.000000001
-    private let decimalFormatter = NumberFormatter()
-    private let scientificFormatter = NumberFormatter()
+    var ans: Double = 0
+    var inputs: String =  ""
+    var isError = false
+    var isNegative = false
+    var lastInput: Double = 0
+    let maxInput = 9
+    let formatterUpperBreakPoint = 999999999.9
+    let formatterLowerBreakPoint = 0.000000001
+    let decimalFormatter = NumberFormatter()
+    let scientificFormatter = NumberFormatter()
     
     init() {
         decimalFormatter.numberStyle = .decimal

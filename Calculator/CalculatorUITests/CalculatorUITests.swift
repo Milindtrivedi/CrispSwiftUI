@@ -23,7 +23,7 @@ final class CalculatorUITests: XCTestCase {
         // Put teardown code here. This method is called after the invocation of each test method in the class.
     }
     
-    func testClipboardFunctionality(){
+    func testUIexistanceAndTaps(){
         
         let app = XCUIApplication()
         app.launch()
@@ -61,7 +61,7 @@ final class CalculatorUITests: XCTestCase {
         let six = app.staticTexts["6"]
         XCTAssert(six.exists)
         
-        let minus = app.images["Minus"]
+        let minus = app.images["Remove"]
         XCTAssert(minus.exists)
         
         let one = app.staticTexts["1"]
@@ -73,7 +73,7 @@ final class CalculatorUITests: XCTestCase {
         let three = app.staticTexts["3"]
         XCTAssert(three.exists)
         
-        let plus = app.images["Plus"]
+        let plus = app.images["Add"]
         XCTAssert(plus.exists)
         
         let zero = app.staticTexts["0"]
@@ -84,5 +84,17 @@ final class CalculatorUITests: XCTestCase {
         
         let equal = app.images["equal"]
         XCTAssert(equal.exists)
+       
+        seven.tap()
+        plus.tap()
+        nine.tap()
+        equal.tap()
+        minus.tap()
+        one.tap()
+        seven.tap()
+        equal.tap()
+    
+        let text = app.staticTexts["-1"] // 7 + 9 - 17 -> deduced to 16 - 17 -> =  -1
+        XCTAssert(text.exists)
     }
 }

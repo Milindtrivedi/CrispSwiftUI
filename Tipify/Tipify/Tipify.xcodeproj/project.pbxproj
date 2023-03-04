@@ -16,6 +16,11 @@
 		BD49CD9B29B1EC190012D405 /* TipifyUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD49CD9A29B1EC190012D405 /* TipifyUITestsLaunchTests.swift */; };
 		BD49CDAB29B1EEC40012D405 /* Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD49CDAA29B1EEC40012D405 /* Helpers.swift */; };
 		BD49CDAE29B1EF750012D405 /* ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD49CDAD29B1EF750012D405 /* ViewModel.swift */; };
+		BDD6839729B313FD0073D92C /* TipView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDD6839629B313FD0073D92C /* TipView.swift */; };
+		BDD6839929B31CEB0073D92C /* BillInputView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDD6839829B31CEB0073D92C /* BillInputView.swift */; };
+		BDD6839B29B33B4E0073D92C /* SplitPersonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDD6839A29B33B4E0073D92C /* SplitPersonView.swift */; };
+		BDD6839D29B340670073D92C /* PerPersonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDD6839C29B340670073D92C /* PerPersonView.swift */; };
+		BDD6839F29B34F000073D92C /* EachTotalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDD6839E29B34F000073D92C /* EachTotalView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -48,6 +53,11 @@
 		BD49CD9A29B1EC190012D405 /* TipifyUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TipifyUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		BD49CDAA29B1EEC40012D405 /* Helpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Helpers.swift; sourceTree = "<group>"; };
 		BD49CDAD29B1EF750012D405 /* ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModel.swift; sourceTree = "<group>"; };
+		BDD6839629B313FD0073D92C /* TipView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TipView.swift; sourceTree = "<group>"; };
+		BDD6839829B31CEB0073D92C /* BillInputView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BillInputView.swift; sourceTree = "<group>"; };
+		BDD6839A29B33B4E0073D92C /* SplitPersonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplitPersonView.swift; sourceTree = "<group>"; };
+		BDD6839C29B340670073D92C /* PerPersonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PerPersonView.swift; sourceTree = "<group>"; };
+		BDD6839E29B34F000073D92C /* EachTotalView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EachTotalView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -145,6 +155,11 @@
 			isa = PBXGroup;
 			children = (
 				BD49CD7F29B1EC170012D405 /* ContentView.swift */,
+				BDD6839629B313FD0073D92C /* TipView.swift */,
+				BDD6839829B31CEB0073D92C /* BillInputView.swift */,
+				BDD6839A29B33B4E0073D92C /* SplitPersonView.swift */,
+				BDD6839C29B340670073D92C /* PerPersonView.swift */,
+				BDD6839E29B34F000073D92C /* EachTotalView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -297,8 +312,13 @@
 			files = (
 				BD49CD8029B1EC170012D405 /* ContentView.swift in Sources */,
 				BD49CDAB29B1EEC40012D405 /* Helpers.swift in Sources */,
+				BDD6839929B31CEB0073D92C /* BillInputView.swift in Sources */,
+				BDD6839B29B33B4E0073D92C /* SplitPersonView.swift in Sources */,
+				BDD6839F29B34F000073D92C /* EachTotalView.swift in Sources */,
 				BD49CDAE29B1EF750012D405 /* ViewModel.swift in Sources */,
 				BD49CD7E29B1EC170012D405 /* TipifyApp.swift in Sources */,
+				BDD6839729B313FD0073D92C /* TipView.swift in Sources */,
+				BDD6839D29B340670073D92C /* PerPersonView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

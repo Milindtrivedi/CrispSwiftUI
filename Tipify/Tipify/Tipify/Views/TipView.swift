@@ -10,7 +10,6 @@ import SwiftUI
 struct TipView: View {
     
     @ObservedObject var BindedVM : viewModel
-   
     
     var body: some View {
         ZStack {
@@ -27,7 +26,6 @@ struct TipView: View {
                 }
                 .padding([.leading,.trailing], 20)
                 
-                
                 HStack(spacing: 16.0) {
                     Button {
                         BindedVM.StepperMinusTapped()
@@ -37,7 +35,6 @@ struct TipView: View {
                             .foregroundColor(.white)
                             .frame(width: 50.0,height: 50.0)
                     }
-                    
                     ZStack {
                         Text(BindedVM.tip + "%")
                             .font(.system(size: 40.0, weight: .semibold))
@@ -48,12 +45,8 @@ struct TipView: View {
                         
                             .multilineTextAlignment(.center)
                             .keyboardType(.decimalPad)
-                            
-                        
                     }
                     .frame(width: UIScreen.screenWidth * 0.5)
-                    
-                    
                     Button {
                         BindedVM.StepperPlusTapped()
                     } label: {
@@ -62,11 +55,10 @@ struct TipView: View {
                             .foregroundColor(.white)
                             .frame(width: 50.0,height: 50.0)
                     }
-                    
                 }
                 .padding()
             }
-        }
+        }//.background(.black)
     }
 }
 

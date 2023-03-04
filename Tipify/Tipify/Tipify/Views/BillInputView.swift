@@ -14,7 +14,6 @@ struct BillInputView: View {
     var body: some View {
         ZStack {
             VStack(spacing: 16.0){
-                
                 HStack {
                     HStack {
                         Text("BILL TOTAL")
@@ -31,7 +30,7 @@ struct BillInputView: View {
                                 .padding(.leading, 25)
                                 .multilineTextAlignment(.trailing)
                                 .keyboardType(.decimalPad)
-                                
+                            
                                 .toolbar {
                                     ToolbarItemGroup(placement: .keyboard) {
                                         Spacer()
@@ -56,17 +55,14 @@ struct BillInputView: View {
                                 .padding(.leading, 0)
                                 .padding(.top, 5)
                                 .keyboardType(.decimalPad)
-                            
                                 .onTapGesture {
                                     BindedVM.decimalValue = ""
                                 }
-                                
                         }
                     }
                 }
                 .padding()
                 .padding(.top, 100)
-                
             }
         }
         

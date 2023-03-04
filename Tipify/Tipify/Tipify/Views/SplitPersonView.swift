@@ -26,7 +26,6 @@ struct SplitPersonView: View {
                 }
                 .padding([.leading,.trailing], 20)
                 
-                
                 HStack(spacing: 16.0) {
                     Button {
                         BindedVM.StepperSplitMinusTapped()
@@ -46,8 +45,7 @@ struct SplitPersonView: View {
                             .keyboardType(.decimalPad)
                     }
                     .frame(width: UIScreen.screenWidth * 0.5)
-                    
-                    
+                
                     Button {
                         BindedVM.StepperSplitPlusTapped()
                     } label: {

@@ -59,6 +59,9 @@ struct SplitPersonView: View {
                 .padding()
             }
         }//.background(.black)
+        .onChange(of: BindedVM.Persons) { newValue in
+            BindedVM.performCalculations()
+        }
     }
 }
 

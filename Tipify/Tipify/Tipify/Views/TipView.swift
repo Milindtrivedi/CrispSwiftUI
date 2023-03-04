@@ -59,6 +59,9 @@ struct TipView: View {
                 .padding()
             }
         }//.background(.black)
+        .onChange(of: BindedVM.tip) { newValue in
+            BindedVM.performCalculations()
+        }
     }
 }
 

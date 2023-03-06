@@ -62,65 +62,36 @@ final class viewModel : ObservableObject {
         }
     }
     
-    func performCalculations(){
+    func performCalculations() {
+        let totalBill = Double(totalValue) ?? 0
+        let decimalBill = Double("0." + decimalValue) ?? 0
+        let totalBillWithDecimal = totalBill + decimalBill
         
-        let totalBillStr = totalValue.replacingOccurrences(of: ".", with: "") + "." + decimalValue.replacingOccurrences(of: ".", with: "")
+        let tipPercentage = Double(tip) ?? 20
+        let tipAmount = totalBillWithDecimal * tipPercentage / 100
+        let totalPerPerson = (totalBillWithDecimal) / (Double(Persons) ?? 1)
         
-        guard let doubleofTotalBill = Double(totalBillStr) else {
-            return
-        }
-        
-        let eachbillInDouble = doubleofTotalBill / (Double(Persons) ?? 1.0)
-        let eachBillStr = String(format: "%.2f", eachbillInDouble)
-        
-        
-        let TotalBillcomponents = eachBillStr.split(separator: ".")
-        if TotalBillcomponents.count == 2 {
-            let integerPart = String(TotalBillcomponents[0])
-            let fractionalPart = String(TotalBillcomponents[1])
-            self.eachBillLHS = ""
-            self.eachBillRHS = ""
-            self.eachBillLHS = integerPart
-            self.eachBillRHS = fractionalPart
-        } else {
-            print("Invalid input string")
-        }
-            
-        let tipInDoubleValue = (Double(tip) ?? 20.0) / 100.0
-        let totalTip = doubleofTotalBill * tipInDoubleValue
-        let TipEach = Double(totalTip) / (Double(Persons) ?? 2.0)
-        let TipEachSTR = String(format: "%.2f", TipEach)
-        
-        let Tipcomponents = TipEachSTR.split(separator: ".")
-        if Tipcomponents.count == 2 {
-            let integerPart = String(Tipcomponents[0])
-            let fractionalPart = String(Tipcomponents[1])
-            self.eachTipLHS = ""
-            self.eachTipRHS = ""
-            self.eachTipLHS = integerPart
-            self.eachTipRHS = fractionalPart
-        } else {
-            print("Invalid input string")
-        }
-        
-        
-        let Finaltotalindouble = TipEach + eachbillInDouble
-        let FinaltotalSTR = String(format: "%.2f", Finaltotalindouble)
-        
-        let Finaltotalcomponents = FinaltotalSTR.split(separator: ".")
-        if Finaltotalcomponents.count == 2 {
-            let integerPart = String(Finaltotalcomponents[0])
-            let fractionalPart = String(Finaltotalcomponents[1])
-            self.FinalTotalLHS = ""
-            self.FinalTotalRHS = ""
-            self.FinalTotalLHS = integerPart
-            self.FinalTotalRHS = fractionalPart
-        } else {
-            print("Invalid input string")
-        }
-        
-        
+        clearAllFileds()
+
+        (eachBillLHS, eachBillRHS) = separateDecimal(totalPerPerson)
+        (eachTipLHS, eachTipRHS) = separateDecimal(tipAmount / (Double(Persons) ?? 0))
+        (FinalTotalLHS, FinalTotalRHS) = separateDecimal(totalPerPerson + (tipAmount / (Double(Persons) ?? 0)))
     }
+
+    fileprivate func separateDecimal(_ value: Double) -> (String, String) {
+        let (intPart, fracPart) = modf(value)
+        return (String(Int(intPart)), String(Int(abs(fracPart) * 100)))
+    }
+    
+    fileprivate func clearAllFileds() {
+        eachBillLHS = ""
+        eachBillRHS = ""
+        eachTipLHS = ""
+        eachTipRHS = ""
+        FinalTotalLHS = ""
+        FinalTotalRHS = ""
+    }
+
     
 }
 

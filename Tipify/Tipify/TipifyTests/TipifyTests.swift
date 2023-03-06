@@ -10,27 +10,32 @@ import XCTest
 
 final class TipifyTests: XCTestCase {
 
-    override func setUpWithError() throws {
-        // Put setup code here. This method is called before the invocation of each test method in the class.
+    var Billamount = "1637"
+    var BillamountDeci = "35" //1637.35
+    var model : viewModel!
+    
+    override func setUp() {
+        super.setUp()
+        model = viewModel()
     }
-
-    override func tearDownWithError() throws {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
+    
+    override func tearDown() {
+        super.tearDown()
     }
-
-    func testExample() throws {
-        // This is an example of a functional test case.
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
-        // Any test you write for XCTest can be annotated as throws and async.
-        // Mark your test throws to produce an unexpected failure when your test encounters an uncaught error.
-        // Mark your test async to allow awaiting for asynchronous code to complete. Check the results with assertions afterwards.
-    }
-
-    func testPerformanceExample() throws {
-        // This is an example of a performance test case.
-        self.measure {
-            // Put the code you want to measure the time of here.
-        }
+    
+    func testCalculations() {
+        model.totalValue = Billamount
+        model.decimalValue = BillamountDeci
+        model.tip = "30"
+        model.Persons = "9"
+        model.performCalculations()
+        
+        XCTAssertEqual(model.eachBillLHS, "181", "Per Persion Bill not calculated properly") // 1637 / 9 = 181 LHS
+        XCTAssertEqual(model.eachBillRHS, "92", "Per Persion Bill not calculated properly") // 1637 / 9 = .92 RHS offsetted
+        XCTAssertEqual(model.eachTipLHS, "54", "Tip is not calculated properly") //(1632 * 0.30) / 9 = 54 LHS
+        XCTAssertEqual(model.eachTipRHS, "57", "Tip isnot calculated properly") //(1632 * 0.30) / 9 = 56667 // ~=57 offsetted
+        XCTAssertEqual(model.FinalTotalLHS, "236", "Per Person Total is not calculated properly") // 181 + 55 = 235 + 1 (from RHS) = 236
+        XCTAssertEqual(model.FinalTotalRHS, "50", "Per Person Total is not calculated properly") // 0.92 + 057 = 1.49 =~ 50 offsetted and added +1 to LHS
     }
 
 }

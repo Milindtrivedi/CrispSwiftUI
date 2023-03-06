@@ -2,8 +2,8 @@
 //  EachTotalView.swift
 //  Tipify
 //
-//  Created by Apple on 04/03/23.
-//
+//  Created by Milind Trivedi on 03/03/23.
+//  Copyright Milind Trivedi © 2023 all rights reserved
 
 import SwiftUI
 
@@ -27,7 +27,7 @@ struct EachTotalView: View {
                             .padding(.leading, 25)
                             .multilineTextAlignment(.trailing)
                             .keyboardType(.decimalPad)
-                            .minimumScaleFactor(0.5)
+                            .minimumScaleFactor(0.9)
                             .onTapGesture {
                                 BindedVM.totalValue = ""
                             }
@@ -40,7 +40,7 @@ struct EachTotalView: View {
                             .padding(.leading, 0)
                             .padding(.top, 5)
                             .keyboardType(.decimalPad)
-                            .minimumScaleFactor(0.5)
+                            .minimumScaleFactor(0.9)
                             .onTapGesture {
                                 BindedVM.decimalValue = ""
                             }

@@ -27,6 +27,7 @@ struct EachTotalView: View {
                             .padding(.leading, 25)
                             .multilineTextAlignment(.trailing)
                             .keyboardType(.decimalPad)
+                            .minimumScaleFactor(0.5)
                             .onTapGesture {
                                 BindedVM.totalValue = ""
                             }
@@ -39,7 +40,7 @@ struct EachTotalView: View {
                             .padding(.leading, 0)
                             .padding(.top, 5)
                             .keyboardType(.decimalPad)
-                        
+                            .minimumScaleFactor(0.5)
                             .onTapGesture {
                                 BindedVM.decimalValue = ""
                             }

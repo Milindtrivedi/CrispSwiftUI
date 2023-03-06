@@ -18,7 +18,7 @@ struct ContentView: View {
     var body: some View {
         
         ZStack {
-            ScrollView {
+            ScrollView(showsIndicators: false){
                 VStack(spacing: 16.0) {
                     
                     //:HEADER BILL INPUT VIEW

@@ -34,7 +34,7 @@ struct PerPersonView: View {
                             .keyboardType(.decimalPad)
                             .padding(.leading, -8)
                             .padding(.top, -16)
-                    }
+                    }.frame(maxHeight: 70.0)
                 }
                 Spacer()
                 VStack(alignment: .trailing) {
@@ -50,6 +50,7 @@ struct PerPersonView: View {
                             .font(.system(size: 50.0,weight: .semibold))
                             .foregroundColor(.white)
                             .keyboardType(.decimalPad)
+                            
                         Text(BindedVM.eachTipRHS)
                         
                             .font(.title)
@@ -59,7 +60,8 @@ struct PerPersonView: View {
                             .padding(.leading, -8)
                             .padding(.top, -16)
                         
-                    }
+                        
+                    }.frame(maxHeight: 70.0)
                 }
             }
             .padding()

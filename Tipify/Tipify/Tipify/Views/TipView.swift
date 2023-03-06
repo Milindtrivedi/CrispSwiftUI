@@ -45,6 +45,7 @@ struct TipView: View {
                         
                             .multilineTextAlignment(.center)
                             .keyboardType(.decimalPad)
+                            .minimumScaleFactor(0.5)
                     }
                     .frame(width: UIScreen.screenWidth * 0.5)
                     Button {

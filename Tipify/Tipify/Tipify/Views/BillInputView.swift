@@ -30,7 +30,7 @@ struct BillInputView: View {
                                 .padding(.leading, 25)
                                 .multilineTextAlignment(.trailing)
                                 .keyboardType(.decimalPad)
-                            
+                                .minimumScaleFactor(0.5)
                                 .toolbar {
                                     ToolbarItemGroup(placement: .keyboard) {
                                         Spacer()
@@ -58,13 +58,14 @@ struct BillInputView: View {
                                 .onTapGesture {
                                     BindedVM.decimalValue = ""
                                 }
+                                .minimumScaleFactor(0.5)
                         }
                     }
                 }
                 .padding()
                 .padding(.top, 100)
             }
-        }
+        }//.background(.black)
         
         .onChange(of: BindedVM.totalValue) { newValue in
             BindedVM.performCalculations()

@@ -80,7 +80,14 @@ final class viewModel : ObservableObject {
 
     fileprivate func separateDecimal(_ value: Double) -> (String, String) {
         let (intPart, fracPart) = modf(value)
-        return (String(Int(intPart)), String(Int(abs(fracPart) * 100)))
+        
+        if intPart <= Double(Int.max) {
+            return (String(Int(intPart)), String(Int(abs(fracPart) * 100)))
+           } else {
+               return ("Err", String(Int(abs(fracPart) * 100)))
+           }
+        
+        
     }
     
     fileprivate func clearAllFileds() {

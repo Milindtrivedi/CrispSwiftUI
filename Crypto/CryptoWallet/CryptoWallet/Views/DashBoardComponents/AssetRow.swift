@@ -15,7 +15,7 @@ struct AssetRow: View {
             HStack(alignment:.center, spacing: 16.0) {
                 
                 Image(systemName: "pencil.circle")
-                    .renderingMode(<#T##renderingMode: Image.TemplateRenderingMode?##Image.TemplateRenderingMode?#>)
+                    
                 
                 VStack(spacing: 16.0){
                     

@@ -19,6 +19,8 @@
 		BD8BB22829B71644004C0955 /* Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD8BB22729B71644004C0955 /* Helpers.swift */; };
 		BD8BB22B29B7169F004C0955 /* AppStrings.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD8BB22A29B7169F004C0955 /* AppStrings.swift */; };
 		BD8BB22E29B71E2B004C0955 /* AppConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD8BB22D29B71E2B004C0955 /* AppConstants.swift */; };
+		BD8BB23029B7391D004C0955 /* BalanceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD8BB22F29B7391D004C0955 /* BalanceView.swift */; };
+		BD8BB23229B73EA1004C0955 /* CoinView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD8BB23129B73EA1004C0955 /* CoinView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -54,6 +56,8 @@
 		BD8BB22729B71644004C0955 /* Helpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Helpers.swift; sourceTree = "<group>"; };
 		BD8BB22A29B7169F004C0955 /* AppStrings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppStrings.swift; sourceTree = "<group>"; };
 		BD8BB22D29B71E2B004C0955 /* AppConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppConstants.swift; sourceTree = "<group>"; };
+		BD8BB22F29B7391D004C0955 /* BalanceView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BalanceView.swift; sourceTree = "<group>"; };
+		BD8BB23129B73EA1004C0955 /* CoinView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoinView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -178,6 +182,8 @@
 			isa = PBXGroup;
 			children = (
 				BD8BB22429B715D8004C0955 /* HeaderView.swift */,
+				BD8BB23129B73EA1004C0955 /* CoinView.swift */,
+				BD8BB22F29B7391D004C0955 /* BalanceView.swift */,
 			);
 			path = DashBoardComponents;
 			sourceTree = "<group>";
@@ -339,8 +345,10 @@
 				BD8BB22B29B7169F004C0955 /* AppStrings.swift in Sources */,
 				BD8BB1F629B714BB004C0955 /* Dashboard.swift in Sources */,
 				BD8BB1F429B714BB004C0955 /* CryptoWalletApp.swift in Sources */,
+				BD8BB23229B73EA1004C0955 /* CoinView.swift in Sources */,
 				BD8BB22229B71525004C0955 /* CryptoViewModel.swift in Sources */,
 				BD8BB22E29B71E2B004C0955 /* AppConstants.swift in Sources */,
+				BD8BB23029B7391D004C0955 /* BalanceView.swift in Sources */,
 				BD8BB22829B71644004C0955 /* Helpers.swift in Sources */,
 				BD8BB22529B715D8004C0955 /* HeaderView.swift in Sources */,
 			);

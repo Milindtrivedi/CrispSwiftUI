@@ -8,15 +8,25 @@
 import SwiftUI
 
 struct Dashboard: View {
+    
+    @ObservedObject var vm = CryptoViewModel()
+    
     var body: some View {
         ZStack {
-            VStack(spacing: 16.0){
-                HeaderView()
-                    .padding()
-                Spacer()
+            ScrollView {
+                VStack(spacing: 16.0){
+                    HeaderView()
+                        .padding()
+                    
+                    BalanceView()
+                    
+                    CoinView(coinData: vm.coinData, stackedBarData: vm.coinBarData)
+                    
+                    Spacer()
+                }
             }
         }.background(Color(hex: "0D0C0F"))
-
+        
     }
 }
 

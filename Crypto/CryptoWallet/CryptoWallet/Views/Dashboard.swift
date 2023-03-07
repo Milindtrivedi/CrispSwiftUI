@@ -12,15 +12,22 @@ struct Dashboard: View {
     @ObservedObject var vm = CryptoViewModel()
     
     var body: some View {
-        ZStack {
+        VStack {
+            HeaderView()
+                .padding()
+            
+            BalanceView()
+            
             ScrollView {
                 VStack(spacing: 16.0){
-                    HeaderView()
-                        .padding()
-                    
-                    BalanceView()
+//                    HeaderView()
+//                        .padding()
+//
+//                    BalanceView()
                     
                     CoinView(coinData: vm.coinData, stackedBarData: vm.coinBarData)
+                    
+                    AssetCatalogue(catalogueData: vm.catalogueData)
                     
                     Spacer()
                 }

@@ -23,6 +23,7 @@ struct HeaderView: View {
                             .resizable()
                             .scaledToFit()
                             .frame(width: 30.0,height: 30.0)
+                            .foregroundColor(.white)
                         Text(AppStrings.DashboardCryptoTitle)
                             .foregroundColor(Color(hex: AppConstants.TextlightGrayClr))
                             .padding(.trailing, 10)

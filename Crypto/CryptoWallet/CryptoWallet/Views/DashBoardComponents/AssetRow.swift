@@ -8,25 +8,47 @@
 import SwiftUI
 
 struct AssetRow: View {
+    
+    var coinData : coinAssetDetails
+    
     var body: some View {
         
         ZStack{
             
             HStack(alignment:.center, spacing: 16.0) {
+                ZStack {
+                    if coinData.name.localizedCaseInsensitiveContains("Bitcoin") {
+                        Image(coinData.logo)
+                            .resizable()
+                            .foregroundColor(.white)
+                            .frame(width: 30,height: 30)
+                            .rotationEffect(.degrees(10))
+                            .padding()
+                    } else {
+                        Image(coinData.logo)
+                            .resizable()
+                            .foregroundColor(.white)
+                            .frame(width: 30,height: 30)
+                            .padding()
+                    }
+                }
+                .background(
+                    Color(hex: AppConstants.BgClrIcons)
+                        .clipShape(Circle())
+                )
                 
-                Image(systemName: "pencil.circle")
                     
                 
-                VStack(spacing: 16.0){
+                VStack(spacing: 4.0){
                     
                     HStack {
-                        Text("datum.name")
+                        Text(coinData.name)
                             .foregroundColor(Color.white)
                             .font(.title2)
                         
                         Spacer()
                         
-                        Text("datum.price")
+                        Text(coinData.price)
                             .foregroundColor(Color.white)
                             .font(.title2)
                         
@@ -34,28 +56,30 @@ struct AssetRow: View {
                     }
                     
                     HStack {
-                        Text("datum.name")
+                        Text(coinData.perunitPrice)
                             .foregroundColor(Color(hex: AppConstants.TextlightGrayClr))
-                            .font(.title3)
+                            .font(.callout)
+                            .minimumScaleFactor(0.5)
                         
                         Spacer()
                         
-                        Text("datum.price")
+                        Text(coinData.variance)
                             .foregroundColor(Color(hex: AppConstants.TextYellowClr))
-                            .font(.title3)
+                            .font(.callout)
+                            .minimumScaleFactor(0.1)
                         
                         
                     }
                 }
                 
-            }
-        }.background(Color.black)
+            }.padding()
+        }.background(Color(hex: AppConstants.ViewBackGroundClr))
     }
 }
 
 struct AssetRow_Previews: PreviewProvider {
     static var previews: some View {
-        AssetRow()
+        AssetRow(coinData: coinAssetDetails(name: "Bitcoin", price: "$128,143.2", perunitPrice: "1 BTC $21,359.20", variance: "+222.20 (1,05%)", logo: "btc"))
     }
 }
 

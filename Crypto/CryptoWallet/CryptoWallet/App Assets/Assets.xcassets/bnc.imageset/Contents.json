@@ -1,17 +1,17 @@
 {
   "images" : [
     {
-      "filename" : "ethereum.png",
+      "filename" : "binance.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
-      "filename" : "ethereum-2.png",
+      "filename" : "binance-2.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
-      "filename" : "ethereum-3.png",
+      "filename" : "binance-3.png",
       "idiom" : "universal",
       "scale" : "3x"
     }

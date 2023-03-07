@@ -12,6 +12,7 @@ final class AppStrings {
     static let Dashboardtitle = "Crypto Wallet"
     static let DashboardCryptoTitle = "ETH"
     static let DashboarBalanceTitle = "Your balance"
+    static let AssetCatalogueTitle = "Your assets"
     
 }
 

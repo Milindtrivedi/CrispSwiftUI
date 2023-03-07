@@ -48,6 +48,7 @@ struct CoinView: View {
                         )
                         .foregroundStyle(shape.color)
                     }
+                   
                 }.chartLegend(.hidden)
                     .frame(height: 400.0)
             }
@@ -74,7 +75,7 @@ struct Bitcoin : Identifiable, Hashable {
 }
 
 
-struct BitcoinChart: Identifiable {
+struct BitcoinChart: Identifiable, Hashable {
     var color: Color
     var type: String
     var count: Double

@@ -16,4 +16,5 @@ final class AppConstants {
     static let BarClrETH = "F2EF6E"
     static let BarClrBNB = "2F303A"
     static let BgClrIcons = "24252A"
+    static let BorderClr = "333238"
 }

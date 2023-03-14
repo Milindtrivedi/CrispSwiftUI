@@ -12,11 +12,16 @@ struct DetailsHeaderView: View {
     var backImageName : String
     var rightImageName : String
     var title : String
+    @Environment(\.presentationMode) var presentationMode : Binding<PresentationMode>
+    
     
     var body: some View {
         ZStack {
             HStack {
                 Button {
+                    if backImageName.localizedCaseInsensitiveContains("arrow") {
+                        presentationMode.wrappedValue.dismiss()
+                    }
                     
                 } label: {
                     Image(systemName: backImageName)

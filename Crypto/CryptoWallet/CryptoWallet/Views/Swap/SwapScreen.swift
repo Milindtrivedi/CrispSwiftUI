@@ -9,7 +9,12 @@ import SwiftUI
 
 struct SwapScreen: View {
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        ZStack {
+            VStack(spacing: 16.0){
+                DetailsHeaderView(backImageName: "arrow.left", rightImageName: "gear", title: "Swap")
+                    Spacer()
+            }
+        }.background(Color(hex: AppConstants.ViewBackGroundClr))
     }
 }
 

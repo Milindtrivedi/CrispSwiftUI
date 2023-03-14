@@ -12,19 +12,20 @@ struct Dashboard: View {
     @ObservedObject var vm = CryptoViewModel()
     
     var body: some View {
-        VStack {
-            HeaderView()
-                .padding()
-            BalanceView()
-            ScrollView(showsIndicators: false){
-                VStack(spacing: 16.0){
-                    CoinView(coinData: vm.coinData, stackedBarData: vm.coinBarData)
-                    AssetCatalogue(catalogueData: vm.catalogueData)
-                    Spacer()
+        NavigationStack {
+            VStack {
+                HeaderView()
+                    .padding()
+                BalanceView()
+                ScrollView(showsIndicators: false){
+                    VStack(spacing: 16.0){
+                        CoinView(coinData: vm.coinData, stackedBarData: vm.coinBarData)
+                        AssetCatalogue(catalogueData: vm.catalogueData)
+                        Spacer()
+                    }
                 }
-            }
-        }.background(Color(hex: "0D0C0F"))
-        
+            }.background(Color(hex: "0D0C0F"))
+        }
     }
 }
 

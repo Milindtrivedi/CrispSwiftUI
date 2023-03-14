@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		BD6DA72B29C08CCA00EBCFB4 /* SwapCoinsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD6DA72A29C08CCA00EBCFB4 /* SwapCoinsView.swift */; };
 		BD8BB1F429B714BB004C0955 /* CryptoWalletApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD8BB1F329B714BB004C0955 /* CryptoWalletApp.swift */; };
 		BD8BB1F629B714BB004C0955 /* Dashboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD8BB1F529B714BB004C0955 /* Dashboard.swift */; };
 		BD8BB1F829B714BD004C0955 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BD8BB1F729B714BD004C0955 /* Assets.xcassets */; };
@@ -45,6 +46,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		BD6DA72A29C08CCA00EBCFB4 /* SwapCoinsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwapCoinsView.swift; sourceTree = "<group>"; };
 		BD8BB1F029B714BB004C0955 /* CryptoWallet.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CryptoWallet.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BD8BB1F329B714BB004C0955 /* CryptoWalletApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CryptoWalletApp.swift; sourceTree = "<group>"; };
 		BD8BB1F529B714BB004C0955 /* Dashboard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Dashboard.swift; sourceTree = "<group>"; };
@@ -244,6 +246,7 @@
 			isa = PBXGroup;
 			children = (
 				F31458A029B79A780007AC96 /* DetailsHeaderView.swift */,
+				BD6DA72A29C08CCA00EBCFB4 /* SwapCoinsView.swift */,
 			);
 			path = SwapScreenComponents;
 			sourceTree = "<group>";
@@ -382,6 +385,7 @@
 				F31458A129B79A780007AC96 /* DetailsHeaderView.swift in Sources */,
 				BD8BB1F629B714BB004C0955 /* Dashboard.swift in Sources */,
 				F314589C29B79A2D0007AC96 /* SwapScreen.swift in Sources */,
+				BD6DA72B29C08CCA00EBCFB4 /* SwapCoinsView.swift in Sources */,
 				BD8BB1F429B714BB004C0955 /* CryptoWalletApp.swift in Sources */,
 				BD8BB23229B73EA1004C0955 /* CoinView.swift in Sources */,
 				BD8BB22229B71525004C0955 /* CryptoViewModel.swift in Sources */,

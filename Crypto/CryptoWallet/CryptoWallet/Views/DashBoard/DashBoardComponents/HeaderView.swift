@@ -8,6 +8,9 @@
 import SwiftUI
 
 struct HeaderView: View {
+    
+    @State private var isShowDetailsView = false
+    
     var body: some View {
         ZStack {
             HStack {
@@ -16,7 +19,7 @@ struct HeaderView: View {
                     .font(.title)
                 Spacer()
                 Button {
-                    print("clicked")
+                    isShowDetailsView = true
                 } label: {
                     HStack(spacing: 4.0){
                         Image("eth")
@@ -36,6 +39,11 @@ struct HeaderView: View {
                 }
             }
         }.background(Color(hex: AppConstants.ViewBackGroundClr))
+            .navigationDestination(isPresented: $isShowDetailsView) {
+                SwapScreen()
+                    .navigationBarBackButtonHidden()
+                    .navigationBarHidden(true)
+            }
     }
 }
 

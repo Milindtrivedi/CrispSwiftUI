@@ -33,7 +33,7 @@ struct SwapCoinsView: View {
                             Image("eth")
                                 .resizable()
                                 .scaledToFit()
-                                .frame(width: 30.0,height: 30.0)
+                                .frame(width: 40.0,height: 40.0)
                                 .foregroundColor(.black)
                                 .background(Color.white)
                                 .clipShape(Circle())
@@ -41,29 +41,36 @@ struct SwapCoinsView: View {
                                 .foregroundColor(Color.white)
                                 .font(.title3)
                                 .bold()
-                                .padding(.leading, 20)
-                                .padding(.trailing, 20)
+                                .padding(.leading, 10)
+                                .padding(.trailing, 10)
                                 .font(.callout)
                             Image(systemName: "arrowtriangle.down.fill")
                                 .padding(.trailing)
                                 .foregroundColor(.white)
                         }.padding(8)
+                            .padding([.top,.bottom], 0)
                             .background(
                                 Color(hex: AppConstants.CapsuleBackGroundClr)
                             )
                             .clipShape(Capsule())
+                        
                     }
+                    
                     Spacer()
                     Text("$86.059.88")
-                        .foregroundColor(Color(hex: AppConstants.TextlightGrayClr))
-                        .font(.callout)
+                        .foregroundColor(Color.white)
+                        .font(.largeTitle)
                         .minimumScaleFactor(0.5)
+                        .bold()
                 }
                 
-                Spacer()
-            }
+                
+            }.padding()
+                .border(.red)
         }.frame(width: UIScreen.screenWidth)
-        .background(Color(hex: AppConstants.ViewBackGroundClr))
+        .background(
+            Color(hex: AppConstants.ViewBackGroundClr)
+        )
     }
 }
 

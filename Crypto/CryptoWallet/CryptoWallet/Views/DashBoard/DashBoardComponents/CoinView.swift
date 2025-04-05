@@ -64,23 +64,3 @@ struct CoinView_Previews: PreviewProvider {
     }
 }
 
-
-struct Bitcoin : Identifiable, Hashable {
-    
-    let id = UUID()
-    var name : String
-    var price : String
-    var alias : String
-    
-}
-
-
-struct BitcoinChart: Identifiable, Hashable {
-    var color: Color
-    var type: String
-    var count: Double
-    var total: Double
-    var id = UUID()
-}
-
-

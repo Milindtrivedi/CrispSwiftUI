@@ -40,7 +40,7 @@ struct HeaderView: View {
             }
         }.background(Color(hex: AppConstants.ViewBackGroundClr))
             .navigationDestination(isPresented: $isShowDetailsView) {
-                SwapScreen()
+                SwapDetailsView()
                     .navigationBarBackButtonHidden()
                     .navigationBarHidden(true)
             }

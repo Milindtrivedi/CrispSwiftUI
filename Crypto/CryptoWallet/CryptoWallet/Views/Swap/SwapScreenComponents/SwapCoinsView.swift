@@ -8,45 +8,58 @@
 import SwiftUI
 
 struct SwapCoinsView: View {
+    
+    @ObservedObject var vm = CryptoViewModel()
+    
+    @State var swapCoinData : currentCurrency
+    
     var body: some View {
         ZStack {
-            VStack(spacing: 75.0) {
+            
+            Color(hex: AppConstants.ViewBackGroundClr)
+            
+            VStack {
                 
                 HStack {
-                    Text("In Wallet: 10.214 AVAX")
+                    Text(swapCoinData.walletbalance)
                         .foregroundColor(Color(hex: AppConstants.TextlightGrayClr))
                         .font(.callout)
                         .minimumScaleFactor(0.5)
                     Spacer()
-                    Text("$86.059.88")
+                    Text(swapCoinData.walletbalanceDollar)
                         .foregroundColor(Color(hex: AppConstants.TextlightGrayClr))
                         .font(.callout)
                         .minimumScaleFactor(0.5)
                 }
+                
+                Spacer()
                 
                 HStack {
                     Button {
                        
                         
                     } label: {
-                        HStack(spacing: 4.0){
-                            Image("eth")
+                        HStack(spacing: 16.0){
+                            Image(swapCoinData.swaptoimage)
                                 .resizable()
-                                .scaledToFit()
+                                .scaledToFill()
                                 .frame(width: 40.0,height: 40.0)
                                 .foregroundColor(.black)
                                 .background(Color.white)
                                 .clipShape(Circle())
-                            Text(AppStrings.DashboardCryptoTitle)
+                                
+                            Text(swapCoinData.swaptoname)
                                 .foregroundColor(Color.white)
                                 .font(.title3)
                                 .bold()
-                                .padding(.leading, 10)
-                                .padding(.trailing, 10)
                                 .font(.callout)
-                            Image(systemName: "arrowtriangle.down.fill")
-                                .padding(.trailing)
+                            Image(systemName: "triangle.fill")
+                                .resizable()
+                                .frame(width: 15.0, height: 9.0)
                                 .foregroundColor(.white)
+                                .rotationEffect(Angle(degrees: 180), anchor: .center)
+                                
+                                
                         }.padding(8)
                             .padding([.top,.bottom], 0)
                             .background(
@@ -57,7 +70,7 @@ struct SwapCoinsView: View {
                     }
                     
                     Spacer()
-                    Text("$86.059.88")
+                    Text(swapCoinData.swapvalue)
                         .foregroundColor(Color.white)
                         .font(.largeTitle)
                         .minimumScaleFactor(0.5)
@@ -66,16 +79,13 @@ struct SwapCoinsView: View {
                 
                 
             }.padding()
-                .border(.red)
-        }.frame(width: UIScreen.screenWidth)
-        .background(
-            Color(hex: AppConstants.ViewBackGroundClr)
-        )
+        }.frame(height: 160.0)
+            .roundedCornerWithBorder(lineWidth: 1, borderColor: Color(hex: AppConstants.BorderClr), radius: 14, corners: [.allCorners])
     }
 }
 
 struct SwapCoinsView_Previews: PreviewProvider {
     static var previews: some View {
-        SwapCoinsView()
+        SwapCoinsView(swapCoinData: currentCurrency(walletbalance: "In Wallet: 10.214 AVAX", walletbalanceDollar: "$86.059.88", swapvalue: "884.24", swaptoimage: "eth", swaptoname: "ETH", isSwapIconPresent: true))
     }
 }

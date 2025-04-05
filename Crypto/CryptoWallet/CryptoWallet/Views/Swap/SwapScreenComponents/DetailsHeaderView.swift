@@ -54,7 +54,8 @@ struct DetailsHeaderView: View {
                 }
                 
                 
-            }.padding()
+            }.padding(.vertical)
+                .padding(.horizontal,10)
             
         }.background(Color(hex: AppConstants.ViewBackGroundClr))
     }

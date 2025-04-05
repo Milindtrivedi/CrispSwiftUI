@@ -84,15 +84,3 @@ struct AssetRow_Previews: PreviewProvider {
 }
 
 
-
-struct coinAssetDetails : Identifiable, Hashable {
-    
-    var name : String
-    var price : String
-    var perunitPrice : String
-    var variance : String
-    var id = UUID()
-    var logo : String
-    
-}
-

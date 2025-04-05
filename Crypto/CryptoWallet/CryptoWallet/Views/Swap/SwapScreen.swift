@@ -11,8 +11,10 @@ struct SwapScreen: View {
     var body: some View {
         ZStack {
             VStack(spacing: 16.0){
-                DetailsHeaderView(backImageName: "arrow.left", rightImageName: "gear", title: "Swap")
+                DetailsHeaderView(backImageName: "arrow.left", rightImageName: "gear", title: "jjjjjjjj")
                     Spacer()
+                
+                SwapDetailsView()
             }
         }.background(Color(hex: AppConstants.ViewBackGroundClr))
     }

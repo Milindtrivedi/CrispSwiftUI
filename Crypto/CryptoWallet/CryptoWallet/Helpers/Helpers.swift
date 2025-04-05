@@ -53,3 +53,22 @@ extension String {
     }
 }
 
+
+
+struct RoundedCorner: Shape {
+    var radius: CGFloat = CGFloat(14.0)
+    var corners: UIRectCorner = .allCorners
+    
+    func path(in rect: CGRect) -> Path {
+        let path = UIBezierPath(roundedRect: rect, byRoundingCorners: corners, cornerRadii: CGSize(width: radius, height: radius))
+        return Path(path.cgPath)
+    }
+}
+
+extension View {
+    func roundedCornerWithBorder(lineWidth: CGFloat, borderColor: Color = Color(hex: AppConstants.BorderClr), radius: CGFloat, corners: UIRectCorner) -> some View {
+        clipShape(RoundedCorner(radius: radius, corners: corners) )
+            .overlay(RoundedCorner(radius: radius, corners: corners)
+                .stroke(borderColor, lineWidth: lineWidth))
+    }
+}

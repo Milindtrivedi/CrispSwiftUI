@@ -7,7 +7,7 @@
 
 import Foundation
 
-final class AppConstants {
+public class AppConstants {
     static let ViewBackGroundClr = "0D0C0F"
     static let CapsuleBackGroundClr = "26272F"
     static let TextlightGrayClr = "8E8E96"
@@ -17,4 +17,5 @@ final class AppConstants {
     static let BarClrBNB = "2F303A"
     static let BgClrIcons = "24252A"
     static let BorderClr = "333238"
+    static let SwapActionClr = "665EF3"
 }

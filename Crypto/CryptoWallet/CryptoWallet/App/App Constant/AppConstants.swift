@@ -18,4 +18,5 @@ public class AppConstants {
     static let BgClrIcons = "24252A"
     static let BorderClr = "333238"
     static let SwapActionClr = "665EF3"
+    static let BarClrOther = "41414D"
 }

@@ -27,6 +27,11 @@
 		F314589829B793090007AC96 /* AssetCatalogue.swift in Sources */ = {isa = PBXBuildFile; fileRef = F314589729B793090007AC96 /* AssetCatalogue.swift */; };
 		F314589C29B79A2D0007AC96 /* SwapScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = F314589B29B79A2D0007AC96 /* SwapScreen.swift */; };
 		F31458A129B79A780007AC96 /* DetailsHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F31458A029B79A780007AC96 /* DetailsHeaderView.swift */; };
+		F3907C7D2DA11D7E0093963A /* SwapDetailRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3907C7C2DA11D7D0093963A /* SwapDetailRow.swift */; };
+		F3907C812DA1626B0093963A /* ChartsCarouselView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3907C802DA1626B0093963A /* ChartsCarouselView.swift */; };
+		F3907C832DA162910093963A /* TransectionHistoryListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3907C822DA162910093963A /* TransectionHistoryListView.swift */; };
+		F3907C852DA162B70093963A /* StatsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3907C842DA162B70093963A /* StatsView.swift */; };
+		F3907C872DA1981C0093963A /* CryptoChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3907C862DA1981C0093963A /* CryptoChartView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -70,6 +75,11 @@
 		F314589729B793090007AC96 /* AssetCatalogue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssetCatalogue.swift; sourceTree = "<group>"; };
 		F314589B29B79A2D0007AC96 /* SwapScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwapScreen.swift; sourceTree = "<group>"; };
 		F31458A029B79A780007AC96 /* DetailsHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsHeaderView.swift; sourceTree = "<group>"; };
+		F3907C7C2DA11D7D0093963A /* SwapDetailRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwapDetailRow.swift; sourceTree = "<group>"; };
+		F3907C802DA1626B0093963A /* ChartsCarouselView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartsCarouselView.swift; sourceTree = "<group>"; };
+		F3907C822DA162910093963A /* TransectionHistoryListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransectionHistoryListView.swift; sourceTree = "<group>"; };
+		F3907C842DA162B70093963A /* StatsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatsView.swift; sourceTree = "<group>"; };
+		F3907C862DA1981C0093963A /* CryptoChartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CryptoChartView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -176,6 +186,7 @@
 		BD8BB21F29B714F1004C0955 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				F3907C7F2DA1623B0093963A /* Stats  */,
 				F314589A29B79A1F0007AC96 /* Swap */,
 				F314589929B79A0D0007AC96 /* DashBoard */,
 			);
@@ -247,11 +258,23 @@
 		F314589D29B79A320007AC96 /* SwapScreenComponents */ = {
 			isa = PBXGroup;
 			children = (
+				F3907C7C2DA11D7D0093963A /* SwapDetailRow.swift */,
 				F31458A029B79A780007AC96 /* DetailsHeaderView.swift */,
 				BD6DA72A29C08CCA00EBCFB4 /* SwapCoinsView.swift */,
 				F3060F902C9EBFDD003226EF /* SwapDetailsView.swift */,
 			);
 			path = SwapScreenComponents;
+			sourceTree = "<group>";
+		};
+		F3907C7F2DA1623B0093963A /* Stats  */ = {
+			isa = PBXGroup;
+			children = (
+				F3907C802DA1626B0093963A /* ChartsCarouselView.swift */,
+				F3907C862DA1981C0093963A /* CryptoChartView.swift */,
+				F3907C822DA162910093963A /* TransectionHistoryListView.swift */,
+				F3907C842DA162B70093963A /* StatsView.swift */,
+			);
+			path = "Stats ";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -386,18 +409,23 @@
 			files = (
 				BD8BB22B29B7169F004C0955 /* AppStrings.swift in Sources */,
 				F31458A129B79A780007AC96 /* DetailsHeaderView.swift in Sources */,
+				F3907C7D2DA11D7E0093963A /* SwapDetailRow.swift in Sources */,
 				BD8BB1F629B714BB004C0955 /* Dashboard.swift in Sources */,
 				F314589C29B79A2D0007AC96 /* SwapScreen.swift in Sources */,
 				BD6DA72B29C08CCA00EBCFB4 /* SwapCoinsView.swift in Sources */,
 				BD8BB1F429B714BB004C0955 /* CryptoWalletApp.swift in Sources */,
 				F3060F912C9EBFDD003226EF /* SwapDetailsView.swift in Sources */,
+				F3907C832DA162910093963A /* TransectionHistoryListView.swift in Sources */,
 				BD8BB23229B73EA1004C0955 /* CoinView.swift in Sources */,
 				BD8BB22229B71525004C0955 /* CryptoViewModel.swift in Sources */,
 				BD8BB22E29B71E2B004C0955 /* AppConstants.swift in Sources */,
+				F3907C812DA1626B0093963A /* ChartsCarouselView.swift in Sources */,
 				BD8BB23029B7391D004C0955 /* BalanceView.swift in Sources */,
+				F3907C852DA162B70093963A /* StatsView.swift in Sources */,
 				BD8BB22829B71644004C0955 /* Helpers.swift in Sources */,
 				BD8BB22529B715D8004C0955 /* HeaderView.swift in Sources */,
 				BD8BB23429B7570B004C0955 /* AssetRow.swift in Sources */,
+				F3907C872DA1981C0093963A /* CryptoChartView.swift in Sources */,
 				F314589829B793090007AC96 /* AssetCatalogue.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

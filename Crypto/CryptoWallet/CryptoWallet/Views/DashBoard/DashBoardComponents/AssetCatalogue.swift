@@ -10,7 +10,7 @@ import SwiftUI
 struct AssetCatalogue: View {
     
     var catalogueData : [coinAssetDetails]
-    
+    @State var isShowDetailsView = false
     var body: some View {
         ZStack {
             ScrollView {
@@ -21,10 +21,19 @@ struct AssetCatalogue: View {
                     Spacer()
                 }.padding()
                 ForEach(catalogueData) { datum in
-                    AssetRow(coinData: datum)
+                    Button {
+                        isShowDetailsView = true
+                    } label: {
+                        AssetRow(coinData: datum)
+                    }
                 }
             }
         }.background(Color(hex: AppConstants.ViewBackGroundClr))
+            .navigationDestination(isPresented: $isShowDetailsView) {
+                SwapDetailsView()
+                    .navigationBarBackButtonHidden()
+                    .navigationBarHidden(true)
+            }
     }
 }
 

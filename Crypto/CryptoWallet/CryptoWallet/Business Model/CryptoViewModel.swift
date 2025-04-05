@@ -60,3 +60,22 @@ struct currentCurrency : Identifiable, Hashable {
     var swaptoname : String
     var isSwapIconPresent : Bool
 }
+
+
+struct Transaction: Identifiable {
+    let id = UUID()
+    let category: String
+    let date: String
+    let time: String
+    let amount: String
+    let eth: String
+    let icon: String
+}
+
+struct ChartData: Identifiable {
+    let id = UUID()
+    let percentage: Int
+    let color: [Color]
+    let data: [Double]
+    let transactions: [Transaction]
+}

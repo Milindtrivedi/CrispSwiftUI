@@ -78,4 +78,5 @@ struct ChartData: Identifiable {
     let color: [Color]
     let data: [Double]
     let transactions: [Transaction]
+    let month : String
 }

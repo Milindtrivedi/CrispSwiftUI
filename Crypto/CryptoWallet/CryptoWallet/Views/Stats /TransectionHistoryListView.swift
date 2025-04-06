@@ -16,18 +16,19 @@ struct TransectionHistoryListView: View {
         Text("Transaction History")
             .font(.headline)
             .frame(maxWidth: .infinity, alignment: .leading)
-            .padding(.horizontal)
+            .padding()
         
         ScrollView {
-            VStack(spacing: 16) {
+            VStack(spacing: 24) {
                 ForEach(charts[selectedChartIndex].transactions) { transaction in
                     HStack {
                         Image(systemName: transaction.icon)
-                            .frame(width: 40, height: 40)
-                            .background(Color.gray.opacity(0.2))
+                            .frame(width: 50, height: 50)
+                            .foregroundStyle(Color(hex: AppConstants.BarClrBTC))
+                            .background(Color(hex: AppConstants.BgClrIcons))
                             .clipShape(Circle())
                         
-                        VStack(alignment: .leading) {
+                        VStack(alignment: .leading,spacing: 4) {
                             Text(transaction.category)
                                 .bold()
                             Text("\(transaction.date), at \(transaction.time)")
@@ -37,7 +38,7 @@ struct TransectionHistoryListView: View {
                         
                         Spacer()
                         
-                        VStack(alignment: .trailing) {
+                        VStack(alignment: .trailing, spacing: 4) {
                             Text(transaction.amount)
                                 .bold()
                             Text(transaction.eth)

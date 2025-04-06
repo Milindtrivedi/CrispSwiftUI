@@ -11,6 +11,7 @@ struct CryptoChartView: View {
     
     @Binding var data: [Double]
     @Binding var colors: [Color]
+    @Binding var percentage: String
     
     @State private var animateChart = false
     
@@ -25,12 +26,12 @@ struct CryptoChartView: View {
                 DonutSegment(startAngle: angle(at: index),
                              endAngle: angle(at: index + 1))
                     .trim(from: 0, to: animateChart ? 1 : 0)  // Animate Drawing
-                    .stroke(colors[index], lineWidth: 40)
+                    .stroke(colors[index], lineWidth: 50)
                     .animation(.easeOut(duration: 1.2).delay(Double(index) * 0.2), value: animateChart)
             }
             
             VStack(spacing: 4) {
-                Text("80%")
+                Text(percentage)
                     .font(.title)
                     .fontWeight(.bold)
                     .foregroundColor(.white)
@@ -39,7 +40,7 @@ struct CryptoChartView: View {
                     .foregroundColor(.gray)
             }
         }
-        .frame(width: 250, height: 250)
+        .frame(width: 225, height: 225)
         .background(Color(hex: AppConstants.ViewBackGroundClr))
         .onAppear {
             animateChart = true

@@ -14,21 +14,30 @@ struct ChartsCarouselView: View {
     
     var body: some View {
         VStack(spacing: 16.0){
-            Text("January")
+            
+            Text(charts[selectedChartIndex].month)
                 .font(.title)
                 .bold()
-                
+            
             
             TabView(selection: $selectedChartIndex) {
                 ForEach(charts.indices, id: \ .self) { index in
                     ZStack {
-                        CryptoChartView(data: .constant(charts[index].data), colors: .constant(charts[index].color))
+                        CryptoChartView(data: .constant(charts[index].data), colors: .constant(charts[index].color), percentage: .constant(String(describing: charts[index].percentage) + "%"))
                     }
                     .tag(index)
                 }
-            }.frame(height: 300.0)
-                .padding()
-            .tabViewStyle(PageTabViewStyle(indexDisplayMode: .always))
+            }.frame(height: 275.0)
+                .tabViewStyle(PageTabViewStyle(indexDisplayMode: .never))
+            
+            // Custom Page Indicator BELOW the chart
+            HStack(spacing: 8) {
+                ForEach(charts.indices, id: \.self) { index in
+                    Circle()
+                        .fill(selectedChartIndex == index ? Color.white : Color.gray.opacity(0.5))
+                        .frame(width: 8, height: 8)
+                }
+            }
         }
     }
 }
